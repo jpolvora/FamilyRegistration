@@ -1,15 +1,15 @@
 ﻿using Bogus;
-using FamilyRegistration.Core.UseCases;
+using FamilyRegistration.Core.UseCases.ProcessarLista;
 
 namespace FamilyRegistration.Web.Routes;
 
-public class SampleData
+public class SampleDataGenerator
 {
-    public static List<Model> Generate(int count = 100)
+    public static List<FamilyDTO> Generate(int count = 100)
     {
-        var result = new List<Model>();
+        var result = new List<FamilyDTO>();
 
-        var family = new Faker<Model>()
+        var family = new Faker<FamilyDTO>()
             .RuleFor(f => f.Key, f => Guid.NewGuid().ToString())
             .RuleFor(f => f.FamilyIncome, f => f.Random.Number(1, 1600))
             .RuleFor(f => f.NumOfDependents, f => f.Random.Number(1, 5))

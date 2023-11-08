@@ -1,8 +1,8 @@
 ﻿using MiddlewarePipelineLib;
 
-namespace FamilyRegistration.Core;
+namespace FamilyRegistration.Core.Middlewares;
 
-public class FamilyContext : Context
+public class FamilyRegistrationContext : Context
 {
     public required string Key { get; set; }
     public int FamilyIncome { get; set; }

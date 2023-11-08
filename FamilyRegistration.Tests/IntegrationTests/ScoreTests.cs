@@ -1,5 +1,5 @@
-using FamilyRegistration.Core;
 using FamilyRegistration.Core.Middlewares;
+using FamilyRegistration.Core.Pipelines;
 using FluentAssertions;
 using MiddlewarePipelineLib;
 
@@ -11,14 +11,14 @@ public class ScoreTests
     public async void ScoreShoulbBeEqual5()
     {
         //arrange
-        var ctx = new FamilyContext()
+        var ctx = new FamilyRegistrationContext()
         {
             Key = Guid.NewGuid().ToString(),
             NumOfDependents = 1,
             FamilyIncome = 901
         };
 
-        var pipeline = new MiddlewarePipeline<FamilyContext>();
+        var pipeline = new MiddlewarePipeline<FamilyRegistrationContext>();
         pipeline.Use(new FamilyIncomeScoreMiddleware());
         pipeline.Use(new NumOfDependentsMiddleware());
 
@@ -35,14 +35,14 @@ public class ScoreTests
     public async void ScoreShoudBeEqual3()
     {
         //arrange
-        var ctx = new FamilyContext()
+        var ctx = new FamilyRegistrationContext()
         {
             Key = Guid.NewGuid().ToString(),
             NumOfDependents = 5,
             FamilyIncome = 2000
         };
 
-        var pipeline = new MiddlewarePipeline<FamilyContext>();
+        var pipeline = new MiddlewarePipeline<FamilyRegistrationContext>();
         pipeline.Use(new FamilyIncomeScoreMiddleware());
         pipeline.Use(new NumOfDependentsMiddleware());
 
@@ -59,14 +59,14 @@ public class ScoreTests
     public async void ScoreShoudBeEqual7()
     {
         //arrange
-        var ctx = new FamilyContext()
+        var ctx = new FamilyRegistrationContext()
         {
             Key = Guid.NewGuid().ToString(),
             NumOfDependents = 2,
             FamilyIncome = 900
         };
 
-        var pipeline = new MiddlewarePipeline<FamilyContext>();
+        var pipeline = new MiddlewarePipeline<FamilyRegistrationContext>();
         pipeline.Use(new FamilyIncomeScoreMiddleware());
         pipeline.Use(new NumOfDependentsMiddleware());
 
@@ -84,14 +84,14 @@ public class ScoreTests
     public async void ScoreShoudBeEqual8()
     {
         //arrange
-        var ctx = new FamilyContext()
+        var ctx = new FamilyRegistrationContext()
         {
             Key = Guid.NewGuid().ToString(),
             NumOfDependents = 3,
             FamilyIncome = 899
         };
 
-        var pipeline = new MiddlewarePipeline<FamilyContext>();
+        var pipeline = new MiddlewarePipeline<FamilyRegistrationContext>();
         pipeline.Use(new FamilyIncomeScoreMiddleware());
         pipeline.Use(new NumOfDependentsMiddleware());
 
@@ -108,14 +108,14 @@ public class ScoreTests
     public async void ScoreShoudBeEqualZero()
     {
         //arrange
-        var ctx = new FamilyContext()
+        var ctx = new FamilyRegistrationContext()
         {
             Key = Guid.NewGuid().ToString(),
             NumOfDependents = 0,
             FamilyIncome = 1501
         };
 
-        var pipeline = new MiddlewarePipeline<FamilyContext>();
+        var pipeline = new MiddlewarePipeline<FamilyRegistrationContext>();
         pipeline.Use(new FamilyIncomeScoreMiddleware());
         pipeline.Use(new NumOfDependentsMiddleware());
 
@@ -132,7 +132,7 @@ public class ScoreTests
     public async void ScoreShoudBeEqual6()
     {
         //arrange
-        var ctx = new FamilyContext()
+        var ctx = new FamilyRegistrationContext()
         {
             Key = Guid.NewGuid().ToString(),
             NumOfDependents = 4,
@@ -154,7 +154,7 @@ public class ScoreTests
     public async void ShouldHaveTwoErrors()
     {
         //arrange
-        var ctx = new FamilyContext()
+        var ctx = new FamilyRegistrationContext()
         {
             Key = Guid.NewGuid().ToString(),
             NumOfDependents = 4,

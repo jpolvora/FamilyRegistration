@@ -9,7 +9,7 @@ public class FamilyIncomeScoreMiddlewareTests
     [Fact]
     public async void ShouldReturn_3_When_Income_Is_901()
     {
-        var ctx = new FamilyContext()
+        var ctx = new FamilyRegistrationContext()
         {
             Key = Guid.NewGuid().ToString(),
             FamilyIncome = 901
@@ -25,7 +25,7 @@ public class FamilyIncomeScoreMiddlewareTests
     [Fact]
     public async void ShouldReturn_5_When_Income_Is_900()
     {
-        var ctx = new FamilyContext()
+        var ctx = new FamilyRegistrationContext()
         {
             Key = Guid.NewGuid().ToString(),
             FamilyIncome = 900
@@ -41,7 +41,7 @@ public class FamilyIncomeScoreMiddlewareTests
     [Fact]
     public async void ShouldReturn_5_When_Income_Is_Zero()
     {
-        var ctx = new FamilyContext()
+        var ctx = new FamilyRegistrationContext()
         {
             Key = Guid.NewGuid().ToString(),
             FamilyIncome = 0
@@ -57,7 +57,7 @@ public class FamilyIncomeScoreMiddlewareTests
     [Fact]
     public async void ShouldReturn_Zero_When_Income_IsGreatherThan_1500()
     {
-        var ctx = new FamilyContext()
+        var ctx = new FamilyRegistrationContext()
         {
             Key = Guid.NewGuid().ToString(),
             FamilyIncome = 1501

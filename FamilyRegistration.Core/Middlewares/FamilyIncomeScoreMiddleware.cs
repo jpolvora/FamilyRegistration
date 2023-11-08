@@ -2,9 +2,9 @@
 
 namespace FamilyRegistration.Core.Middlewares;
 
-public class FamilyIncomeScoreMiddleware : IMiddleware<FamilyContext>
+public class FamilyIncomeScoreMiddleware : IMiddleware<FamilyRegistrationContext>
 {
-    public Task Execute(FamilyContext context)
+    public Task Execute(FamilyRegistrationContext context)
     {
         var valueToIncrement = context.FamilyIncome switch
         {

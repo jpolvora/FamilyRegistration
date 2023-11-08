@@ -2,9 +2,9 @@
 
 namespace FamilyRegistration.Core.Middlewares;
 
-public class NumOfDependentsMiddleware : IMiddleware<FamilyContext>
+public class NumOfDependentsMiddleware : IMiddleware<FamilyRegistrationContext>
 {
-    public Task Execute(FamilyContext context)
+    public Task Execute(FamilyRegistrationContext context)
     {
         //switch (context.QtdeDependentes)
         //{

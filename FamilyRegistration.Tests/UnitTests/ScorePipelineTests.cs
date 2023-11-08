@@ -1,4 +1,4 @@
-﻿using FamilyRegistration.Core;
+﻿using FamilyRegistration.Core.Pipelines;
 using FluentAssertions;
 
 namespace FamilyRegistration.Tests.UnitTests;

@@ -9,7 +9,7 @@ public class NumOfDependentesScoreMiddlewareTests
     [Fact]
     public async void ShouldReturn_0_When_NumOfDependents_Is_0()
     {
-        var ctx = new FamilyContext()
+        var ctx = new FamilyRegistrationContext()
         {
             Key = Guid.NewGuid().ToString(),
             NumOfDependents = 0,
@@ -25,7 +25,7 @@ public class NumOfDependentesScoreMiddlewareTests
     [Fact]
     public async void ShouldReturn_2_When_NumOfDependents_IsEqual_2()
     {
-        var ctx = new FamilyContext()
+        var ctx = new FamilyRegistrationContext()
         {
             Key = Guid.NewGuid().ToString(),
             NumOfDependents = 2,
@@ -41,7 +41,7 @@ public class NumOfDependentesScoreMiddlewareTests
     [Fact]
     public async void ShouldReturn_3_When_NumOfDependents_IsGreatherOrEqual_3()
     {
-        var ctx = new FamilyContext()
+        var ctx = new FamilyRegistrationContext()
         {
             Key = Guid.NewGuid().ToString(),
             NumOfDependents = 3,
