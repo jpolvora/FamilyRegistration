@@ -1,4 +1,7 @@
+using FamilyRegistration.Core;
+using FamilyRegistration.Core.UseCases;
 using FamilyRegistration.Web.Routes;
+using MiddlewarePipelineLib;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,6 +9,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddScoped<MiddlewarePipeline<FamilyContext>, CustomPipeline>();
+builder.Services.AddScoped<IUseCase<ProcessarListaInput, ProcessarListaOutput>, ProcessarLista>();
 
 var app = builder.Build();
 
@@ -23,8 +29,3 @@ app.MapGet("/", SampleDataRoute.Handle)
     .WithOpenApi();
 
 app.Run();
-
-internal record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}

@@ -2,14 +2,13 @@
 using MiddlewarePipelineLib;
 
 namespace FamilyRegistration.Core;
-public class ScorePipeline : MiddlewarePipeline<FamilyContext>
+
+public class CustomPipeline : MiddlewarePipeline<FamilyContext>
 {
-    public ScorePipeline()
+    public CustomPipeline()
     {
         this.Use(new NumOfDependentsMiddleware());
         this.Use(new FamilyIncomeScoreMiddleware());
-        this.Use(new DummyMiddleware());
-        this.Use(new ThrowExceptionMiddleware());
     }
 }
 
