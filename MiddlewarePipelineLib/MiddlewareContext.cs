@@ -1,4 +1,4 @@
-﻿namespace FamilyRegistration.Core.Pipeline;
+﻿namespace MiddlewarePipelineLib;
 
 public abstract class MiddlewareContext
 {

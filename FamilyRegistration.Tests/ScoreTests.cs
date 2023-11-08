@@ -1,7 +1,7 @@
 using FamilyRegistration.Core;
 using FamilyRegistration.Core.Middlewares;
-using FamilyRegistration.Core.Pipeline;
 using FluentAssertions;
+using MiddlewarePipelineLib;
 
 namespace FamilyRegistration.Tests;
 

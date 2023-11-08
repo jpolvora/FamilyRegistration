@@ -1,5 +1,5 @@
 ﻿using FamilyRegistration.Core.Middlewares;
-using FamilyRegistration.Core.Pipeline;
+using MiddlewarePipelineLib;
 
 namespace FamilyRegistration.Core;
 public class ScorePipeline : MiddlewarePipeline<FamilyContext>

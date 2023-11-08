@@ -1,4 +1,4 @@
-﻿using FamilyRegistration.Core.Pipeline;
+﻿using MiddlewarePipelineLib;
 
 namespace FamilyRegistration.Core;
 
