@@ -1,26 +1,23 @@
 ﻿using FamilyRegistration.Core.Datasources;
-using FamilyRegistration.Core.Pipelines;
-using FamilyRegistration.Core.UseCases;
 using FamilyRegistration.Core.UseCases.ProcessarLista;
 using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace FamilyRegistration.Web.Routes;
 
-public class PipelineRouteHandlers
+public class RouteHandlers
 {
-    public static async Task<Ok<ReportRow[]>> HandleGet(IProcessarListaStrategyUseCase useCase, int count = 100)
+    public static async Task<Ok<OutputItem[]>> HandleGet(IProcessarListaUseCase useCase, int count = 100)
     {
         //pegar dados de algum lugar
 
         IDataSource dataSource = new SampleDataGenerator(count);
         var data = dataSource.GetData();
 
-        var input = new ProcessarListaInput(data);
+        var input = new Input(data);
 
         //instanciar useCase e executar
         //o useCase fica responsável por coordenar as adaptações entre input e output da pipeline
 
-        useCase.SetStrategy(new ProcessarListaPipelineUseCase(new CustomPipeline()));
         var output = await useCase.Execute(input);
 
         //ordenar o output pelo Score mais alto
@@ -29,16 +26,15 @@ public class PipelineRouteHandlers
         return TypedResults.Ok(result);
     }
 
-    public static async Task<Ok<ReportRow[]>> HandlePost(FamilyDTO[] requestData, IProcessarListaStrategyUseCase useCase)
+    public static async Task<Ok<OutputItem[]>> HandlePost(InputItem[] requestData, IProcessarListaUseCase useCase)
     {
         //pegar dados de algum lugar        
-        var input = new ProcessarListaInput(requestData);
+        var input = new Input(requestData);
 
 
         //instanciar useCase e executar
         //o useCase fica responsável por coordenar as adaptações entre input e output da pipeline
 
-        useCase.SetStrategy(new ProcessarListaPipelineUseCase(new CustomPipeline()));
         var output = await useCase.Execute(input);
 
         //ordenar o output pelo Score mais alto

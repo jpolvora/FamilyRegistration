@@ -2,7 +2,7 @@
 
 public static class AdapterExtensions
 {
-    public static FamilyRegistrationContext Adapt(this FamilyDTO model)
+    public static FamilyRegistrationContext Adapt(this InputItem model)
     {
         return new FamilyRegistrationContext()
         {
@@ -12,9 +12,9 @@ public static class AdapterExtensions
         };
     }
 
-    public static ReportRow Adapt(this FamilyRegistrationContext context)
+    public static OutputItem Adapt(this FamilyRegistrationContext context)
     {
-        return new ReportRow()
+        return new OutputItem()
         {
             Key = context.Key,
             FamilyIncome = context.FamilyIncome,

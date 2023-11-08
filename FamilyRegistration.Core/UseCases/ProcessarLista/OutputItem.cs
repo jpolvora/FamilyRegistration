@@ -1,6 +1,6 @@
 ﻿namespace FamilyRegistration.Core.UseCases.ProcessarLista;
 
-public class ReportRow
+public class OutputItem
 {
     public required string Key { get; set; }
     public int FamilyIncome { get; set; }

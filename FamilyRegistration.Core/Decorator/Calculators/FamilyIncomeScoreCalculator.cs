@@ -1,8 +1,8 @@
-﻿namespace FamilyRegistration.Core.Decorators;
+﻿namespace FamilyRegistration.Core.Decorator.Calculators;
 
-public class FamilyIncomeDecorator : BaseDecorator
+public class FamilyIncomeScoreCalculator : ScoreDecorator
 {
-    public FamilyIncomeDecorator(IScoreCalculator wrapped) : base(wrapped)
+    public FamilyIncomeScoreCalculator(ScoreCalculator wrapped) : base(wrapped)
     {
     }
 

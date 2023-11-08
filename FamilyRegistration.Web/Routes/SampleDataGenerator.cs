@@ -13,16 +13,16 @@ public class SampleDataGenerator : IDataSource
         Count = count;
     }
 
-    public IEnumerable<FamilyDTO> GetData()
+    public IEnumerable<InputItem> GetData()
     {
         return Generate(Count);
     }
 
-    private static List<FamilyDTO> Generate(int count = 100)
+    private static List<InputItem> Generate(int count = 100)
     {
-        var result = new List<FamilyDTO>();
+        var result = new List<InputItem>();
 
-        var family = new Faker<FamilyDTO>()
+        var family = new Faker<InputItem>()
             .RuleFor(f => f.Key, f => Guid.NewGuid().ToString())
             .RuleFor(f => f.FamilyIncome, f => f.Random.Number(1, 1600))
             .RuleFor(f => f.NumOfDependents, f => f.Random.Number(1, 5))

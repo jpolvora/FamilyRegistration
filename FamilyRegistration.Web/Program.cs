@@ -1,6 +1,6 @@
 using FamilyRegistration.Core;
+using FamilyRegistration.Core.Decorator;
 using FamilyRegistration.Core.Pipelines;
-using FamilyRegistration.Core.UseCases;
 using FamilyRegistration.Core.UseCases.ProcessarLista;
 using FamilyRegistration.Web.Routes;
 using MiddlewarePipelineLib;
@@ -17,8 +17,9 @@ public class Program
         builder.Services.AddSwaggerGen();
 
         builder.Services.AddScoped<MiddlewarePipeline<FamilyRegistrationContext>, CustomPipeline>();
-        builder.Services.AddScoped<IProcessarListaStrategyUseCase, ProcessarListaStrategy>();
-        builder.Services.AddScoped<IProcessarListaUseCase, ProcessarListaPipelineUseCase>();
+        builder.Services.AddScoped<ScoreCalculator, AggregateScoreCalculator>();
+        builder.Services.AddScoped<IProcessarListaUseCase, ProcessarListaPipeline>();
+        //builder.Services.AddScoped<IProcessarListaUseCase, ProcessarListaDecorator>();
 
         var app = builder.Build();
 
@@ -31,21 +32,14 @@ public class Program
 
         app.UseHttpsRedirection();
 
-        app.MapGet("/pipeline", PipelineRouteHandlers.HandleGet)
-            .WithName("GetSampleData_Pipeline")
+        app.MapGet("/", RouteHandlers.HandleGet)
+            .WithName("GetSampleData")
             .WithOpenApi();
 
-        app.MapPost("/pipeline", PipelineRouteHandlers.HandlePost)
-            .WithName("PostSampleData_Pipeline")
+        app.MapPost("/", RouteHandlers.HandlePost)
+            .WithName("PostSampleData")
             .WithOpenApi();
 
-        app.MapGet("/decorator", DecoratorRouteHandlers.HandleGet)
-         .WithName("GetSampleData_Decorator")
-         .WithOpenApi();
-
-        app.MapPost("/decorator", DecoratorRouteHandlers.HandlePost)
-            .WithName("PostSampleData_Decorator")
-            .WithOpenApi();
 
         app.Run();
     }

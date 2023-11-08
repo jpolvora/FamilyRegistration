@@ -1,8 +1,8 @@
-﻿namespace FamilyRegistration.Core.Decorators;
+﻿namespace FamilyRegistration.Core.Decorator.Calculators;
 
-public class NumOfDependentsDecorator : BaseDecorator
+public class NumOfDependentsScoreCalculator : ScoreDecorator
 {
-    public NumOfDependentsDecorator(IScoreCalculator wrapped) : base(wrapped)
+    public NumOfDependentsScoreCalculator(ScoreCalculator wrapped) : base(wrapped)
     {
     }
 
