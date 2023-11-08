@@ -2,11 +2,11 @@
 
 namespace FamilyRegistration.Core.UseCases.ProcessarLista;
 
-public class ProcessarListaUseCase : IProcessarListaUseCase
+public class ProcessarListaPipelineUseCase : IProcessarListaUseCase
 {
     private readonly MiddlewarePipeline<FamilyRegistrationContext> _pipeline;
 
-    public ProcessarListaUseCase(MiddlewarePipeline<FamilyRegistrationContext> pipeline)
+    public ProcessarListaPipelineUseCase(MiddlewarePipeline<FamilyRegistrationContext> pipeline)
     {
         _pipeline = pipeline;
     }

@@ -1,12 +1,13 @@
-﻿using FamilyRegistration.Core.UseCases;
+﻿using FamilyRegistration.Core.Decorators;
+using FamilyRegistration.Core.UseCases;
 using FamilyRegistration.Core.UseCases.ProcessarLista;
 using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace FamilyRegistration.Web.Routes;
 
-public class SampleDataRoute
+public class DecoratorRouteHandlers
 {
-    public static async Task<Ok<ReportRow[]>> Handle(IProcessarListaUseCase useCase, int count = 100)
+    public static async Task<Ok<ReportRow[]>> HandleGet(IProcessarListaStrategyUseCase useCase, int count = 100)
     {
         //pegar dados de algum lugar
 
@@ -17,6 +18,7 @@ public class SampleDataRoute
         //instanciar useCase e executar
         //o useCase fica responsável por coordenar as adaptações entre input e output da pipeline
 
+        useCase.SetStrategy(new ProcessarListaDecoratorUseCase(new DefaultScoreCalculator()));
         var output = await useCase.Execute(input);
 
         //ordenar o output pelo Score mais alto

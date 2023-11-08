@@ -6,3 +6,4 @@ public interface IProcessarListaUseCase : IUseCase<ProcessarListaInput, Processa
 {
 
 }
+
