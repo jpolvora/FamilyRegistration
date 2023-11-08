@@ -8,5 +8,6 @@ public class ScorePipeline : MiddlewarePipeline<FamilyContext>
     {
         this.Use(new NumOfDependentsMiddleware());
         this.Use(new FamilyIncomeScoreMiddleware());
+        this.Use(new DummyMiddleware());
     }
 }

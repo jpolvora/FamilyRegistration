@@ -18,5 +18,4 @@ public class FamilyIncomeScoreMiddleware : IMiddleware<FamilyContext>
         return Task.CompletedTask;
 
     }
-
 }
