@@ -51,6 +51,8 @@ public class WebApiTests
         Assert.NotNull(result);
 
         Assert.True(result.Length == 1);
+
+        Assert.True(result[0].Score == 6);
         //Console.WriteLine(result);
     }
 }
