@@ -19,22 +19,18 @@ public class Program
 
         builder.Services.AddScoped<MiddlewarePipeline<FamilyRegistrationContext>, CustomPipeline>();
         builder.Services.AddScoped<ScoreCalculator, AggregateScoreCalculator>();
+        builder.Services.AddScoped<IProcessarListaUseCase, ProcessarListaDefault>();
 
-        string? algorithm = builder.Configuration?.GetValue<string>("CustomSettings:Algorithm");
-        if (algorithm == "Pipeline")
-        {
-            builder.Services.AddScoped<IProcessarListaUseCase, ProcessarListaPipeline>();
-        }
-        else if (algorithm == "Decorator")
-        {
-            builder.Services.AddScoped<IProcessarListaUseCase, ProcessarListaDecorator>();
-        }
-        else
-        {
-            builder.Services.AddScoped<IProcessarListaUseCase, ProcessarListaDefault>();
-        }
+        string? processarListaStrategy = builder.Configuration.GetValue<string>("CustomSettings:Strategy");
 
-
+        if (processarListaStrategy == "Pipeline")
+        {
+            builder.Services.AddScoped<IProcessarListaStrategy, ProcessaListaWithPipelineStrategy>();
+        }
+        else if (processarListaStrategy == "Decorator")
+        {
+            builder.Services.AddScoped<IProcessarListaStrategy, ProcessaListaWithDecoratorStrategy>();
+        }
 
         var app = builder.Build();
 

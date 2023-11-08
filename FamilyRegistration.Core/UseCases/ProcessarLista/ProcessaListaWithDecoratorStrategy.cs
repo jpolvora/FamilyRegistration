@@ -1,15 +1,16 @@
-﻿using MiddlewarePipelineLib;
+﻿using FamilyRegistration.Core.Decorator;
 
 namespace FamilyRegistration.Core.UseCases.ProcessarLista;
 
-public class ProcessarListaPipeline : IProcessarListaUseCase
+public class ProcessaListaWithDecoratorStrategy : IProcessarListaStrategy
 {
-    private readonly MiddlewarePipeline<FamilyRegistrationContext> _pipeline;
+    private readonly ScoreCalculator _scoreCalculator;
 
-    public ProcessarListaPipeline(MiddlewarePipeline<FamilyRegistrationContext> pipeline)
+    public ProcessaListaWithDecoratorStrategy(ScoreCalculator scoreCalculator)
     {
-        _pipeline = pipeline;
+        _scoreCalculator = scoreCalculator;
     }
+
     public async Task<Output> Execute(Input input)
     {
         var output = new Output();
@@ -17,7 +18,7 @@ public class ProcessarListaPipeline : IProcessarListaUseCase
         var contexts = input.Select(AdapterExtensions.Adapt);
         foreach (var ctx in contexts)
         {
-            await _pipeline.Execute(ctx);
+            await _scoreCalculator.Execute(ctx);
             output.Add(ctx.Adapt());
         }
 
