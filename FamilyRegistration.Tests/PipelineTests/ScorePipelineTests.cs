@@ -1,7 +1,7 @@
 ﻿using FamilyRegistration.Core.Pipelines;
 using FluentAssertions;
 
-namespace FamilyRegistration.Tests.UnitTests;
+namespace FamilyRegistration.Tests.PipelineTests;
 public class ScorePipelineTests
 {
     [Fact]

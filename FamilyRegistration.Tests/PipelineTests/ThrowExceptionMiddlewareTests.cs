@@ -1,8 +1,8 @@
 ﻿using FamilyRegistration.Core;
-using FamilyRegistration.Core.Middlewares;
+using FamilyRegistration.Core.Pipelines.Middlewares;
 using FluentAssertions;
 
-namespace FamilyRegistration.Tests.UnitTests;
+namespace FamilyRegistration.Tests.PipelineTests;
 
 public class ThrowExceptionMiddlewareTests
 {

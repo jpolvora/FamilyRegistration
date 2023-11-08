@@ -1,9 +1,10 @@
-using FamilyRegistration.Core.Middlewares;
+using FamilyRegistration.Core;
 using FamilyRegistration.Core.Pipelines;
+using FamilyRegistration.Core.Pipelines.Middlewares;
 using FluentAssertions;
 using MiddlewarePipelineLib;
 
-namespace FamilyRegistration.Tests.IntegrationTests;
+namespace FamilyRegistration.Tests.PipelineTests;
 
 public class ScoreTests
 {

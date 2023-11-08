@@ -1,6 +1,4 @@
-﻿using FamilyRegistration.Core.Middlewares;
-
-namespace FamilyRegistration.Core.UseCases.ProcessarLista;
+﻿namespace FamilyRegistration.Core.UseCases.ProcessarLista;
 
 public static class AdapterExtensions
 {

@@ -1,4 +1,4 @@
-using FamilyRegistration.Core.Middlewares;
+using FamilyRegistration.Core;
 using FamilyRegistration.Core.Pipelines;
 using FamilyRegistration.Core.UseCases;
 using FamilyRegistration.Core.UseCases.ProcessarLista;

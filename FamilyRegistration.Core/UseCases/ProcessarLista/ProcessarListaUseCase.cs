@@ -1,5 +1,4 @@
-﻿using FamilyRegistration.Core.Middlewares;
-using MiddlewarePipelineLib;
+﻿using MiddlewarePipelineLib;
 
 namespace FamilyRegistration.Core.UseCases.ProcessarLista;
 

@@ -10,34 +10,37 @@ https://app.diagrams.net/#G12mZhdZ8vdN39F70kvkzcXdgqlzrv0XNU
 
 * Chain of responsability
 * Middleware Pipeline
+* Decorator
+* Strategy
+* Composite
+
 
 ### SOLID Features
 
 * Single Responsability Principle (Middlewares)
 * Dependency Injection (Dependency Inversion principle)
+* Interface Segregation
 
 
 ### Functional Programming
 
 * DTO Adapters
 * Minimal API (ASP.NET Core Web Api)
+* Pattern Matching (switch)
 
 ### OOP Features
 
 * Class and Interface inheritance
+* Abstract classes
+* .NET Generics
 * Constructor parameters
-* Encapsulation (Properties)
+* Encapsulation
 * Methods
+* Async/Await
 * Data Transfer Objects
+* Object Mapper
 
+### More Architecture & Design
 
-## What problem it solves ?
-
-We have a list of records that needs to be processed in order to calculate a score based in a series of criterias that may change through time.
-Instead of implementing the calculations in a big transactional script, which is hard to maintain, we could break it down into smaller components that performs individually into a sequencial steps.
-
-## how it works ?
-
-I choose to use a pattern based on Chain of Responsability.
-
-We create a specific calculator for each criteria
+* Feature Flags
+* Exception Handling

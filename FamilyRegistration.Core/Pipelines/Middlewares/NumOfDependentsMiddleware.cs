@@ -1,6 +1,6 @@
 ﻿using MiddlewarePipelineLib;
 
-namespace FamilyRegistration.Core.Middlewares;
+namespace FamilyRegistration.Core.Pipelines.Middlewares;
 
 public class NumOfDependentsMiddleware : IMiddleware<FamilyRegistrationContext>
 {
