@@ -1,11 +1,24 @@
 ﻿using Bogus;
+using FamilyRegistration.Core.Datasources;
 using FamilyRegistration.Core.UseCases.ProcessarLista;
 
 namespace FamilyRegistration.Web.Routes;
 
-public class SampleDataGenerator
+public class SampleDataGenerator : IDataSource
 {
-    public static List<FamilyDTO> Generate(int count = 100)
+    public int Count { get; }
+
+    public SampleDataGenerator(int count)
+    {
+        Count = count;
+    }
+
+    public IEnumerable<FamilyDTO> GetData()
+    {
+        return Generate(Count);
+    }
+
+    private static List<FamilyDTO> Generate(int count = 100)
     {
         var result = new List<FamilyDTO>();
 
@@ -20,4 +33,6 @@ public class SampleDataGenerator
 
         return result;
     }
+
+
 }

@@ -1,4 +1,5 @@
-﻿using FamilyRegistration.Core.Pipelines;
+﻿using FamilyRegistration.Core.Datasources;
+using FamilyRegistration.Core.Pipelines;
 using FamilyRegistration.Core.UseCases;
 using FamilyRegistration.Core.UseCases.ProcessarLista;
 using Microsoft.AspNetCore.Http.HttpResults;
@@ -11,9 +12,10 @@ public class PipelineRouteHandlers
     {
         //pegar dados de algum lugar
 
-        var items = SampleDataGenerator.Generate(count);
-        var input = new ProcessarListaInput(items);
+        IDataSource dataSource = new SampleDataGenerator(count);
+        var data = dataSource.GetData();
 
+        var input = new ProcessarListaInput(data);
 
         //instanciar useCase e executar
         //o useCase fica responsável por coordenar as adaptações entre input e output da pipeline
