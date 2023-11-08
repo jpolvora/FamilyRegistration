@@ -1,6 +1,6 @@
 ﻿namespace MiddlewarePipelineLib;
 
-public class MiddlewarePipeline<TContext> where TContext : MiddlewareContext
+public class MiddlewarePipeline<TContext> where TContext : Context
 {
     private readonly List<IMiddleware<TContext>> _middlewares = new();
 
@@ -9,11 +9,39 @@ public class MiddlewarePipeline<TContext> where TContext : MiddlewareContext
         _middlewares.Add(middleware);
     }
 
+    public int Count => _middlewares.Count;
+
     public async Task Execute(TContext input)
     {
+        Console.WriteLine("Begin pipeline...");
+
         foreach (var middleware in _middlewares)
         {
-            await middleware.Execute(input);
+            try
+            {
+                await middleware.Execute(input);
+            }
+            catch (Exception ex)
+            {
+                input.Errors.Add(ex);
+            }
+        }
+
+        if (input.Errors.Count > 0)
+        {
+            this.HandleError(input.Errors);
+        }
+
+
+        Console.WriteLine("End Pipeline");
+    }
+
+    protected virtual void HandleError(IEnumerable<Exception> errors)
+    {
+        //handle errors
+        foreach (var error in errors)
+        {
+            Console.Error.WriteLine(error);
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace MiddlewarePipelineLib;
 
-public interface IMiddleware<TContext> where TContext : MiddlewareContext
+public interface IMiddleware<TContext> where TContext : Context
 {
     Task Execute(TContext context);
 }

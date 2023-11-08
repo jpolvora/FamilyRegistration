@@ -2,10 +2,10 @@
 
 namespace FamilyRegistration.Core.Middlewares;
 
-public class DummyMiddleware : IMiddleware<FamilyContext>
+public class ThrowExceptionMiddleware : IMiddleware<FamilyContext>
 {
     public Task Execute(FamilyContext context)
     {
-        return Task.CompletedTask;
+        throw new NotImplementedException();
     }
 }

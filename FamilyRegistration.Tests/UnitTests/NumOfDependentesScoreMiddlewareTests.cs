@@ -2,7 +2,7 @@
 using FamilyRegistration.Core.Middlewares;
 using FluentAssertions;
 
-namespace FamilyRegistration.Tests;
+namespace FamilyRegistration.Tests.UnitTests;
 
 public class NumOfDependentesScoreMiddlewareTests
 {

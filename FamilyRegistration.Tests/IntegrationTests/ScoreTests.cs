@@ -3,7 +3,7 @@ using FamilyRegistration.Core.Middlewares;
 using FluentAssertions;
 using MiddlewarePipelineLib;
 
-namespace FamilyRegistration.Tests;
+namespace FamilyRegistration.Tests.IntegrationTests;
 
 public class ScoreTests
 {
@@ -28,6 +28,7 @@ public class ScoreTests
 
         //assert
         ctx.Score.Should().Be(5);
+        ctx.Errors.Should().HaveCount(0);
     }
 
     [Fact]
@@ -51,6 +52,7 @@ public class ScoreTests
 
         //assert
         ctx.Score.Should().Be(3);
+        ctx.Errors.Should().HaveCount(0);
     }
 
     [Fact]
@@ -74,6 +76,7 @@ public class ScoreTests
 
         //assert
         ctx.Score.Should().Be(7);
+        ctx.Errors.Should().HaveCount(0);
     }
 
 
@@ -81,7 +84,7 @@ public class ScoreTests
     public async void ScoreShoudBeEqual8()
     {
         //arrange
-        var row = new FamilyContext()
+        var ctx = new FamilyContext()
         {
             Key = Guid.NewGuid().ToString(),
             NumOfDependents = 3,
@@ -94,17 +97,18 @@ public class ScoreTests
 
         //act
 
-        await pipeline.Execute(row);
+        await pipeline.Execute(ctx);
 
         //assert
-        row.Score.Should().Be(8);
+        ctx.Score.Should().Be(8);
+        ctx.Errors.Should().HaveCount(0);
     }
 
     [Fact]
     public async void ScoreShoudBeEqualZero()
     {
         //arrange
-        var row = new FamilyContext()
+        var ctx = new FamilyContext()
         {
             Key = Guid.NewGuid().ToString(),
             NumOfDependents = 0,
@@ -117,17 +121,18 @@ public class ScoreTests
 
         //act
 
-        await pipeline.Execute(row);
+        await pipeline.Execute(ctx);
 
         //assert
-        row.Score.Should().Be(0);
+        ctx.Score.Should().Be(0);
+        ctx.Errors.Should().HaveCount(0);
     }
 
     [Fact]
     public async void ScoreShoudBeEqual6()
     {
         //arrange
-        var row = new FamilyContext()
+        var ctx = new FamilyContext()
         {
             Key = Guid.NewGuid().ToString(),
             NumOfDependents = 4,
@@ -138,9 +143,33 @@ public class ScoreTests
 
         //act
 
-        await pipeline.Execute(row);
+        await pipeline.Execute(ctx);
 
         //assert
-        row.Score.Should().Be(6);
+        ctx.Score.Should().Be(6);
+        ctx.Errors.Should().HaveCount(1);
+    }
+
+    [Fact]
+    public async void ShouldHaveTwoErrors()
+    {
+        //arrange
+        var ctx = new FamilyContext()
+        {
+            Key = Guid.NewGuid().ToString(),
+            NumOfDependents = 4,
+            FamilyIncome = 1111
+        };
+
+        var pipeline = new ScorePipeline();
+        pipeline.Use(new ThrowExceptionMiddleware());
+
+        //act
+
+        await pipeline.Execute(ctx);
+
+        //assert
+        ctx.Score.Should().Be(6);
+        ctx.Errors.Should().HaveCount(2);
     }
 }
