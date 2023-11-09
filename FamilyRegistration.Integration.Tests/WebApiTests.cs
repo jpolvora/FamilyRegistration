@@ -1,6 +1,6 @@
 using System.Net;
 using System.Net.Http.Json;
-using FamilyRegistration.Core.UseCases.ProcessarLista;
+using FamilyRegistration.Core.UseCases.ProcessData;
 using Microsoft.AspNetCore.Http;
 
 namespace FamilyRegistration.Integration.Tests;

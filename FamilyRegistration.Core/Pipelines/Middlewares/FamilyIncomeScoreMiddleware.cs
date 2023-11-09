@@ -15,6 +15,8 @@ public class FamilyIncomeScoreMiddleware : IMiddleware<FamilyRegistrationContext
 
         context.IncrementScore(valueToIncrement);
 
+        //context.Bag[this.GetType()] = valueToIncrement;
+
         return Task.CompletedTask;
 
     }

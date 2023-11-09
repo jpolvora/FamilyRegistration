@@ -1,4 +1,4 @@
-﻿using FamilyRegistration.Core.UseCases.ProcessarLista;
+﻿using FamilyRegistration.Core.UseCases.ProcessData;
 
 namespace FamilyRegistration.Core.Datasources;
 public interface IDataSource

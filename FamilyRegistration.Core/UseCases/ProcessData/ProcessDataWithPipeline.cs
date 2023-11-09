@@ -1,12 +1,12 @@
 ﻿using MiddlewarePipelineLib;
 
-namespace FamilyRegistration.Core.UseCases.ProcessarLista;
+namespace FamilyRegistration.Core.UseCases.ProcessData;
 
-public class ProcessaListaWithPipelineStrategy : IProcessarListaStrategy
+public class ProcessDataWithPipeline : IProcessDataStrategy
 {
     private readonly MiddlewarePipeline<FamilyRegistrationContext> _pipeline;
 
-    public ProcessaListaWithPipelineStrategy(MiddlewarePipeline<FamilyRegistrationContext> pipeline)
+    public ProcessDataWithPipeline(MiddlewarePipeline<FamilyRegistrationContext> pipeline)
     {
         _pipeline = pipeline;
     }

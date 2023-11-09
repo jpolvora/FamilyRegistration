@@ -1,12 +1,12 @@
 ﻿using FamilyRegistration.Core.Decorator;
 
-namespace FamilyRegistration.Core.UseCases.ProcessarLista;
+namespace FamilyRegistration.Core.UseCases.ProcessData;
 
-public class ProcessaListaWithDecoratorStrategy : IProcessarListaStrategy
+public class ProcessDataWithDecorators : IProcessDataStrategy
 {
     private readonly ScoreCalculator _scoreCalculator;
 
-    public ProcessaListaWithDecoratorStrategy(ScoreCalculator scoreCalculator)
+    public ProcessDataWithDecorators(ScoreCalculator scoreCalculator)
     {
         _scoreCalculator = scoreCalculator;
     }

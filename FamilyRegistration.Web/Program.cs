@@ -1,7 +1,7 @@
 using FamilyRegistration.Core;
 using FamilyRegistration.Core.Decorator;
 using FamilyRegistration.Core.Pipelines;
-using FamilyRegistration.Core.UseCases.ProcessarLista;
+using FamilyRegistration.Core.UseCases.ProcessData;
 using FamilyRegistration.Web.Routes;
 using MiddlewarePipelineLib;
 
@@ -19,17 +19,17 @@ public class Program
 
         builder.Services.AddScoped<MiddlewarePipeline<FamilyRegistrationContext>, CustomPipeline>();
         builder.Services.AddScoped<ScoreCalculator, AggregateScoreCalculator>();
-        builder.Services.AddScoped<IProcessarListaUseCase, ProcessarListaDefault>();
+        builder.Services.AddScoped<IProcessDataUseCase, ProcessarListaDefault>();
 
         string? processarListaStrategy = builder.Configuration.GetValue<string>("CustomSettings:Strategy");
 
         if (processarListaStrategy == "Pipeline")
         {
-            builder.Services.AddScoped<IProcessarListaStrategy, ProcessaListaWithPipelineStrategy>();
+            builder.Services.AddScoped<IProcessDataStrategy, ProcessDataWithPipeline>();
         }
         else if (processarListaStrategy == "Decorator")
         {
-            builder.Services.AddScoped<IProcessarListaStrategy, ProcessaListaWithDecoratorStrategy>();
+            builder.Services.AddScoped<IProcessDataStrategy, ProcessDataWithDecorators>();
         }
 
         var app = builder.Build();

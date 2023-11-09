@@ -1,12 +1,12 @@
 ﻿using FamilyRegistration.Core.Datasources;
-using FamilyRegistration.Core.UseCases.ProcessarLista;
+using FamilyRegistration.Core.UseCases.ProcessData;
 using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace FamilyRegistration.Web.Routes;
 
 public class RouteHandlers
 {
-    public static async Task<Ok<OutputItem[]>> HandleGet(IProcessarListaUseCase useCase, int count = 100)
+    public static async Task<Ok<OutputItem[]>> HandleGet(IProcessDataUseCase useCase, int count = 100)
     {
         //pegar dados de algum lugar
 
@@ -26,7 +26,7 @@ public class RouteHandlers
         return TypedResults.Ok(result);
     }
 
-    public static async Task<Ok<OutputItem[]>> HandlePost(InputItem[] requestData, IProcessarListaUseCase useCase)
+    public static async Task<Ok<OutputItem[]>> HandlePost(InputItem[] requestData, IProcessDataUseCase useCase)
     {
         //pegar dados de algum lugar        
         var input = new Input(requestData);

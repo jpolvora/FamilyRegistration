@@ -1,4 +1,4 @@
-﻿namespace FamilyRegistration.Core.UseCases.ProcessarLista;
+﻿namespace FamilyRegistration.Core.UseCases.ProcessData;
 
 public class OutputItem
 {

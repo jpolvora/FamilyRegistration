@@ -8,6 +8,7 @@ public class FamilyRegistrationContext : Context
     public int FamilyIncome { get; set; }
     public int NumOfDependents { get; set; }
     public int Score { get; private set; } = 0;
+    public Dictionary<Type, int> Bag { get; } = new();
 
     public void IncrementScore(int valueToIncrement)
     {
