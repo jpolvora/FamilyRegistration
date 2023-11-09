@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FamilyRegistration.Data", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FamilyRegistration.Data.Queue", "FamilyRegistration.Data.Queue\FamilyRegistration.Data.Queue.csproj", "{C84A4AC2-B26E-4815-BE4C-74B87150155E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{FCC20FB0-7824-49FB-8CBB-C003F862CEB9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -60,6 +62,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{AE446118-036D-4F73-8AC1-F63BA0DA32A6} = {FCC20FB0-7824-49FB-8CBB-C003F862CEB9}
+		{6F786F4C-2AAD-42C7-B735-79FA04540613} = {FCC20FB0-7824-49FB-8CBB-C003F862CEB9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AEBBE640-CE5F-4DA8-8271-03D331A11912}
