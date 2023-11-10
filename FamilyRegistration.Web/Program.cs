@@ -33,9 +33,12 @@ public class Program
             builder.Services.AddScoped<IProcessDataStrategy, ProcessDataWithDecorator>();
             builder.Services.AddScoped<AbstractScoreCalculator, AggregateScoreCalculator>();
         }
+        else if (processarListaStrategy == "Observer")
+        {
+            builder.Services.AddScoped<IProcessDataStrategy, ProcessDataWithObservers>();
+        }
         else
         {
-            //no design pattern !
             builder.Services.AddScoped<IProcessDataStrategy, ProcessDataWithTransactionScript>();
         }
 
@@ -79,6 +82,10 @@ public class Program
 
         app.MapGet("/transaction", RouteHandlers.HandleGetWithTransactionScriptStrategy)
             .WithName("GetSampleDataTransaction")
+            .WithOpenApi();
+
+        app.MapGet("/observer", RouteHandlers.HandleGetWithObserverStrategy)
+            .WithName("GetSampleDataObserver")
             .WithOpenApi();
 
         app.Run();
