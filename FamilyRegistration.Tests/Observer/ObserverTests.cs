@@ -1,4 +1,4 @@
-﻿using FamilyRegistration.Core.Strategy;
+﻿using FamilyRegistration.Core.Factory;
 using FamilyRegistration.Core.UseCases.ProcessData;
 using FluentAssertions;
 
@@ -22,8 +22,7 @@ public class ObserverTests
             FamilyIncome = 900
         };
 
-        var useCase = new ProcessDataUseCase(new ProcessDataWithObservers());
-
+        var useCase = ProcessData.WithObservers();
         //act
         var input = new Input(new[] { inputItem });
         var output = await useCase.Execute(input);
@@ -47,7 +46,7 @@ public class ObserverTests
             FamilyIncome = 899
         };
 
-        var useCase = new ProcessDataUseCase(new ProcessDataWithObservers());
+        var useCase = ProcessData.WithObservers();
 
         //act
         var input = new Input(new[] { inputItem });
@@ -72,7 +71,7 @@ public class ObserverTests
             FamilyIncome = 2000
         };
 
-        var useCase = new ProcessDataUseCase(new ProcessDataWithObservers());
+        var useCase = ProcessData.WithObservers();
 
         //act
         var input = new Input(new[] { inputItem });

@@ -1,4 +1,4 @@
-﻿using FamilyRegistration.Core.Strategy;
+﻿using FamilyRegistration.Core.Factory;
 using FamilyRegistration.Core.UseCases.ProcessData;
 using FluentAssertions;
 
@@ -16,7 +16,7 @@ public class TransactScriptTests
             FamilyIncome = 900
         };
 
-        var useCase = new ProcessDataUseCase(new ProcessDataWithTransactionScript());
+        var useCase = ProcessData.WithTransactionScript();
 
         //act
         var input = new Input(new[] { inputItem });
@@ -41,7 +41,7 @@ public class TransactScriptTests
             FamilyIncome = 901
         };
 
-        var useCase = new ProcessDataUseCase(new ProcessDataWithTransactionScript());
+        var useCase = ProcessData.WithTransactionScript();
 
         //act
         var input = new Input(new[] { inputItem });
@@ -66,7 +66,7 @@ public class TransactScriptTests
             FamilyIncome = 2000
         };
 
-        var useCase = new ProcessDataUseCase(new ProcessDataWithTransactionScript());
+        var useCase = ProcessData.WithTransactionScript();
 
         //act
         var input = new Input(new[] { inputItem });

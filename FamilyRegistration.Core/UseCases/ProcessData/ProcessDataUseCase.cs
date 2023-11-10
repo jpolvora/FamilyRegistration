@@ -12,5 +12,4 @@ public class ProcessDataUseCase : IProcessDataUseCase
     }
 
     public Task<Output> Execute(Input input) => _strategy.Execute(input);
-
 }
