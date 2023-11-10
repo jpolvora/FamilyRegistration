@@ -6,16 +6,13 @@ namespace FamilyRegistration.Data;
 
 public class SampleDataGenerator : IDataSource
 {
-    public int Count { get; }
 
-    public SampleDataGenerator(int count)
-    {
-        Count = count;
-    }
+    public SampleDataGenerator() { }
 
-    public IEnumerable<InputItem> GetData()
+    public IEnumerable<InputItem> GetData(int page, int pageSize)
     {
-        return Generate(Count);
+
+        return Generate(pageSize);
     }
 
     private static List<InputItem> Generate(int count = 100)

@@ -3,5 +3,5 @@
 namespace FamilyRegistration.Core.Datasources;
 public interface IDataSource
 {
-    IEnumerable<InputItem> GetData();
+    IEnumerable<InputItem> GetData(int page, int pageSize);
 }

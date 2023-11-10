@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FamilyRegistration.Web", "F
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3A9287FD-F3D2-4DF9-B0DC-192DDF3A3CA9}"
 	ProjectSection(SolutionItems) = preProject
-		diagrama.PNG = diagrama.PNG
+		SOLUTION_ITEMS\diagrama.PNG = SOLUTION_ITEMS\diagrama.PNG
+		SOLUTION_ITEMS\json_format.PNG = SOLUTION_ITEMS\json_format.PNG
+		SOLUTION_ITEMS\MOCK_DATA.json = SOLUTION_ITEMS\MOCK_DATA.json
 		README.md = README.md
 	EndProjectSection
 EndProject
@@ -19,9 +21,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MiddlewarePipelineLib", "Mi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FamilyRegistration.Integration.Tests", "FamilyRegistration.Integration.Tests\FamilyRegistration.Integration.Tests.csproj", "{6F786F4C-2AAD-42C7-B735-79FA04540613}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FamilyRegistration.Data", "FamilyRegistration.Data\FamilyRegistration.Data.csproj", "{C74B7131-6158-4938-A35E-C1946A85DE06}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FamilyRegistration.Data", "FamilyRegistration.Data\FamilyRegistration.Data.csproj", "{C74B7131-6158-4938-A35E-C1946A85DE06}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FamilyRegistration.Data.Queue", "FamilyRegistration.Data.Queue\FamilyRegistration.Data.Queue.csproj", "{C84A4AC2-B26E-4815-BE4C-74B87150155E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FamilyRegistration.Data.Queue", "FamilyRegistration.Data.Queue\FamilyRegistration.Data.Queue.csproj", "{C84A4AC2-B26E-4815-BE4C-74B87150155E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{FCC20FB0-7824-49FB-8CBB-C003F862CEB9}"
 EndProject

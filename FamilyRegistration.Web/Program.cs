@@ -1,8 +1,10 @@
 using FamilyRegistration.Core;
+using FamilyRegistration.Core.Datasources;
 using FamilyRegistration.Core.Decorator;
 using FamilyRegistration.Core.Decorator.Calculators;
 using FamilyRegistration.Core.Pipelines;
 using FamilyRegistration.Core.UseCases.ProcessData;
+using FamilyRegistration.Data;
 using FamilyRegistration.Web.Routes;
 using MiddlewarePipelineLib;
 
@@ -20,7 +22,8 @@ public class Program
 
         builder.Services.AddScoped<MiddlewarePipeline<FamilyRegistrationContext>, CustomPipeline>();
         builder.Services.AddScoped<ScoreCalculator, AggregateScoreCalculator>();
-        builder.Services.AddScoped<IProcessDataUseCase, ProcessarListaDefault>();
+
+        builder.Services.AddScoped<IDataSource, SampleDataGenerator>();
 
         string? processarListaStrategy = builder.Configuration.GetValue<string>("CustomSettings:Strategy");
 
@@ -32,6 +35,8 @@ public class Program
         {
             builder.Services.AddScoped<IProcessDataStrategy, ProcessDataWithDecorators>();
         }
+
+        builder.Services.AddScoped<IProcessDataUseCase, ProcessarListaDefault>();
 
         var app = builder.Build();
 

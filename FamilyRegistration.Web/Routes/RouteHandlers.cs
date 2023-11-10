@@ -7,13 +7,12 @@ namespace FamilyRegistration.Web.Routes;
 
 public class RouteHandlers
 {
-    public static async Task<Ok<OutputItem[]>> HandleGet(IProcessDataUseCase useCase, int count = 100)
+    public static async Task<Ok<OutputItem[]>> HandleGet(IDataSource dataSource, IProcessDataUseCase useCase, int count = 100)
     {
-        //pegar dados de algum lugar
+        //pegar dados de algum lugar já formatados
+        var data = dataSource.GetData(1, count);
 
-        IDataSource dataSource = new SampleDataGenerator(count);
-        var data = dataSource.GetData();
-
+        //prepara o input par ao UseCase
         var input = new Input(data);
 
         //instanciar useCase e executar
