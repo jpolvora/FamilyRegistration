@@ -1,6 +1,5 @@
 ﻿using FamilyRegistration.Core;
 using FamilyRegistration.Core.Decorator;
-using FamilyRegistration.Core.Decorator.Calculators;
 using FluentAssertions;
 
 namespace FamilyRegistration.Tests.Decorator;
@@ -11,7 +10,7 @@ public class DecoratorTests
 
     }
 
-    private static ScoreCalculator GetScoreCalculatorDefault()
+    private static AbstractScoreCalculator GetScoreCalculatorDefault()
     {
         //IScoreCalculator calculator = new NumOfDependetsDecorator(new FamilyIncomeDecorator(new ScoreCalculator()));
         return new AggregateScoreCalculator();

@@ -1,4 +1,7 @@
 ﻿using FamilyRegistration.Core.Datasources;
+using FamilyRegistration.Core.Decorator;
+using FamilyRegistration.Core.Pipelines;
+using FamilyRegistration.Core.Strategy;
 using FamilyRegistration.Core.UseCases.ProcessData;
 using FamilyRegistration.Data;
 using Microsoft.AspNetCore.Http.HttpResults;
@@ -60,11 +63,48 @@ public class RouteHandlers
         return TypedResults.Ok(result);
     }
 
-    public static Ok<OutputItem[]> HandleJsonFilePost(IFormFile formFile, IProcessDataUseCase useCase)
+    public static async Task<Ok<OutputItem[]>> HandleGetWithDecoratorStrattegy(IDataSource dataSource, int count = 100)
     {
-        //IFormFile? formFile = files.Count > 0 ? files[0] : null;
+        //using var scope = provider.CreateScope();
+        //var dataSource = scope.ServiceProvider.GetRequiredService<IDataSource>();
+        //pegar dados de algum lugar já formatados
+        var data = await dataSource.GetData(1, count);
 
+        //prepara o input par ao UseCase
+        var input = new Input(data);
 
-        return TypedResults.Ok(Array.Empty<OutputItem>());
+        //instanciar useCase e executar
+        //o useCase fica responsável por coordenar as adaptações entre input e output da pipeline
+        IProcessDataStrategy strategy = new ProcessDataWithDecorator(new AggregateScoreCalculator());
+        IProcessDataUseCase useCase = new ProcessDataUseCase(strategy);
+        var output = await useCase.Execute(input);
+
+        //ordenar o output pelo Score mais alto
+        var result = output.OrderByDescending(x => x.Score).ToArray();
+
+        return TypedResults.Ok(result);
+    }
+
+    public static async Task<Ok<OutputItem[]>> HandleGetWithPipelineStrategy(IDataSource dataSource, int count = 100)
+    {
+        //using var scope = provider.CreateScope();
+        //var dataSource = scope.ServiceProvider.GetRequiredService<IDataSource>();
+        //pegar dados de algum lugar já formatados
+        var data = await dataSource.GetData(1, count);
+
+        //prepara o input par ao UseCase
+        var input = new Input(data);
+
+        //instanciar useCase e executar
+        //o useCase fica responsável por coordenar as adaptações entre input e output da pipeline
+        IProcessDataStrategy strategy = new ProcessDataWithPipeline(new CustomPipeline());
+        IProcessDataUseCase useCase = new ProcessDataUseCase(strategy);
+        var output = await useCase.Execute(input);
+
+        //ordenar o output pelo Score mais alto
+        var result = output.OrderByDescending(x => x.Score).ToArray();
+
+        return TypedResults.Ok(result);
     }
 }
+

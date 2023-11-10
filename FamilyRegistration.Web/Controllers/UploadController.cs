@@ -29,22 +29,11 @@ public class UploadController : Controller
             PropertyNameCaseInsensitive = true
         };
 
-        JsonFormatOne[]? jsonData = null;
+        var jsonData = await JsonSerializer.DeserializeAsync<JsonFormatOne[]>(fileStream, serializeOptions)
+            ?? throw new Exception("Empty jsonData after deserializing");
 
-        try
-        {
-            jsonData = await JsonSerializer.DeserializeAsync<JsonFormatOne[]>(fileStream, serializeOptions);
-        }
-        catch
-        {
-            //invalid data json format file
-            return TypedResults.StatusCode(422);
-        }
+        var input = jsonData.Select(s => s.Adapt()).AsInput();
 
-
-        var input = jsonData!.Select(s => s.Adapt()).AsInput();
-
-        //instanciar useCase e executar
         //o useCase fica responsável por coordenar as adaptações entre input e output da pipeline
 
         var output = await _useCase.Execute(input);

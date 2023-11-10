@@ -1,8 +1,8 @@
 using FamilyRegistration.Core;
 using FamilyRegistration.Core.Datasources;
 using FamilyRegistration.Core.Decorator;
-using FamilyRegistration.Core.Decorator.Calculators;
 using FamilyRegistration.Core.Pipelines;
+using FamilyRegistration.Core.Strategy;
 using FamilyRegistration.Core.UseCases.ProcessData;
 using FamilyRegistration.Data;
 using FamilyRegistration.Web.Routes;
@@ -30,11 +30,16 @@ public class Program
         }
         else if (processarListaStrategy == "Decorator")
         {
-            builder.Services.AddScoped<IProcessDataStrategy, ProcessDataWithDecorators>();
-            builder.Services.AddScoped<ScoreCalculator, AggregateScoreCalculator>();
+            builder.Services.AddScoped<IProcessDataStrategy, ProcessDataWithDecorator>();
+            builder.Services.AddScoped<AbstractScoreCalculator, AggregateScoreCalculator>();
+        }
+        else
+        {
+            //no design pattern !
+            builder.Services.AddScoped<IProcessDataStrategy, ProcessDataWithNoDesignPattern>();
         }
 
-        builder.Services.AddScoped<IProcessDataUseCase, ProcessarListaDefault>();
+        builder.Services.AddScoped<IProcessDataUseCase, ProcessDataUseCase>();
 
         builder.Services.AddControllers();
 
@@ -63,6 +68,13 @@ public class Program
             .WithName("PostJsonFormatOne")
             .WithOpenApi();
 
+        app.MapGet("/pipeline", RouteHandlers.HandleGetWithPipelineStrategy)
+            .WithName("GetSampleDataPipeline")
+            .WithOpenApi();
+
+        app.MapGet("/decorator", RouteHandlers.HandleGetWithDecoratorStrattegy)
+            .WithName("GetSampleDataDecorator")
+            .WithOpenApi();
 
         app.Run();
     }

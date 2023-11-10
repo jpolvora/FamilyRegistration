@@ -1,6 +1,6 @@
-﻿namespace FamilyRegistration.Core.Decorator.Calculators;
+﻿namespace FamilyRegistration.Core.Decorator;
 
-public class DummyScoreCalculator : ScoreCalculator
+public class ScoreCalculator : AbstractScoreCalculator
 {
     public override Task Execute(FamilyRegistrationContext context)
     {

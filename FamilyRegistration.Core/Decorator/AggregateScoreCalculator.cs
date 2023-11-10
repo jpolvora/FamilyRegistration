@@ -1,17 +1,17 @@
-﻿using FamilyRegistration.Core.Decorator.Calculators;
+﻿namespace FamilyRegistration.Core.Decorator;
 
-namespace FamilyRegistration.Core.Decorator;
-
-public class AggregateScoreCalculator : ScoreCalculator
+public class AggregateScoreCalculator : AbstractScoreCalculator
 {
-    private readonly ScoreCalculator _calculator;
+    private readonly AbstractScoreCalculator _calculator;
     public AggregateScoreCalculator()
     {
-        ScoreCalculator scoreCalculator = new DummyScoreCalculator();
-        scoreCalculator = new NumOfDependentsScoreCalculator(scoreCalculator);
-        scoreCalculator = new FamilyIncomeScoreCalculator(scoreCalculator);
+        _calculator = new ScoreCalculator();
+        _calculator = new NumOfDependentsScoreDecorator(_calculator);
+        _calculator = new FamilyIncomeScoreDecorator(_calculator);
 
-        _calculator = scoreCalculator;
+        //OR
+
+        //_calculator = new NumOfDependentsScoreCalculator(new FamilyIncomeScoreCalculator(new InitialCalculator()));
     }
 
 

@@ -1,12 +1,13 @@
-﻿using FamilyRegistration.Core.Decorator.Calculators;
+﻿using FamilyRegistration.Core.Decorator;
+using FamilyRegistration.Core.UseCases.ProcessData;
 
-namespace FamilyRegistration.Core.UseCases.ProcessData;
+namespace FamilyRegistration.Core.Strategy;
 
-public class ProcessDataWithDecorators : IProcessDataStrategy
+public class ProcessDataWithDecorator : IProcessDataStrategy
 {
-    private readonly ScoreCalculator _scoreCalculator;
+    private readonly AbstractScoreCalculator _scoreCalculator;
 
-    public ProcessDataWithDecorators(ScoreCalculator scoreCalculator)
+    public ProcessDataWithDecorator(AbstractScoreCalculator scoreCalculator)
     {
         _scoreCalculator = scoreCalculator;
     }

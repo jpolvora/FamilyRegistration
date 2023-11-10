@@ -1,4 +1,5 @@
-﻿using MiddlewarePipelineLib;
+﻿using FamilyRegistration.Core.Calculators;
+using MiddlewarePipelineLib;
 
 namespace FamilyRegistration.Core.Pipelines.Middlewares;
 
@@ -6,18 +7,10 @@ public class FamilyIncomeScoreMiddleware : IMiddleware<FamilyRegistrationContext
 {
     public Task Execute(FamilyRegistrationContext context)
     {
-        var valueToIncrement = context.FamilyIncome switch
-        {
-            <= 900 => 5,
-            > 900 and <= 1500 => 3,
-            _ => 0
-        };
+        var valueToIncrement = ScoreCalculators.CalculateScoreByFamilyIncome(context.FamilyIncome);
 
         context.IncrementScore(valueToIncrement);
 
-        //context.Bag[this.GetType()] = valueToIncrement;
-
         return Task.CompletedTask;
-
     }
 }

@@ -1,6 +1,7 @@
-﻿using MiddlewarePipelineLib;
+﻿using FamilyRegistration.Core.UseCases.ProcessData;
+using MiddlewarePipelineLib;
 
-namespace FamilyRegistration.Core.UseCases.ProcessData;
+namespace FamilyRegistration.Core.Strategy;
 
 public class ProcessDataWithPipeline : IProcessDataStrategy
 {
