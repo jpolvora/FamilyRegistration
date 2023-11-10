@@ -22,4 +22,9 @@ public static class AdapterExtensions
             Score = context.Score
         };
     }
+
+    public static Input AsInput(this IEnumerable<InputItem> inputItems)
+    {
+        return new Input(inputItems);
+    }
 }

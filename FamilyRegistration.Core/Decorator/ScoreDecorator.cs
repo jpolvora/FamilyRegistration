@@ -1,4 +1,6 @@
-﻿namespace FamilyRegistration.Core.Decorator;
+﻿using FamilyRegistration.Core.Decorator.Calculators;
+
+namespace FamilyRegistration.Core.Decorator;
 public abstract class ScoreDecorator : ScoreCalculator
 {
     private readonly ScoreCalculator _wrapped;

@@ -1,5 +1,6 @@
 using FamilyRegistration.Core;
 using FamilyRegistration.Core.Decorator;
+using FamilyRegistration.Core.Decorator.Calculators;
 using FamilyRegistration.Core.Pipelines;
 using FamilyRegistration.Core.UseCases.ProcessData;
 using FamilyRegistration.Web.Routes;
@@ -50,6 +51,10 @@ public class Program
         app.MapPost("/", RouteHandlers.HandlePost)
             .WithName("PostSampleData")
             .WithOpenApi();
+
+        app.MapPost("/json", RouteHandlers.HandleJsonPost)
+         .WithName("PostJsonFormatOne")
+         .WithOpenApi();
 
 
         app.Run();

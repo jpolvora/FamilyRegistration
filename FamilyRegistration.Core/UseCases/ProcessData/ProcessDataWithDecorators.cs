@@ -1,4 +1,4 @@
-﻿using FamilyRegistration.Core.Decorator;
+﻿using FamilyRegistration.Core.Decorator.Calculators;
 
 namespace FamilyRegistration.Core.UseCases.ProcessData;
 

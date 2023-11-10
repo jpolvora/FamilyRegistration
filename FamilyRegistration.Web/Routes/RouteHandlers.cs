@@ -44,4 +44,22 @@ public class RouteHandlers
         return TypedResults.Ok(result);
     }
 
+    public static async Task<Ok<OutputItem[]>> HandleJsonPost(JsonFormatOne[] requestData, IProcessDataUseCase useCase)
+    {
+        //convert
+
+        //pegar dados de algum lugar
+        var input = requestData.Select(s => s.Adapt()).AsInput();
+
+        //instanciar useCase e executar
+        //o useCase fica responsável por coordenar as adaptações entre input e output da pipeline
+
+        var output = await useCase.Execute(input);
+
+        //ordenar o output pelo Score mais alto
+        var result = output.OrderByDescending(x => x.Score).ToArray();
+
+        return TypedResults.Ok(result);
+    }
+
 }
