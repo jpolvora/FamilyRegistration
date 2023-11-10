@@ -1,6 +1,6 @@
 ﻿using FamilyRegistration.Core.Datasources;
 using FamilyRegistration.Core.Decorator;
-using FamilyRegistration.Core.Pipelines;
+using FamilyRegistration.Core.Pipeline;
 using FamilyRegistration.Core.Strategy;
 using FamilyRegistration.Core.UseCases.ProcessData;
 using FamilyRegistration.Data;

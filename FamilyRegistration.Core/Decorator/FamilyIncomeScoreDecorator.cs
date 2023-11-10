@@ -11,7 +11,7 @@ public class FamilyIncomeScoreDecorator : ScoreDecorator
 
     public override Task Execute(FamilyRegistrationContext context)
     {
-        var valueToIncrement = ScoreCalculators.CalculateScoreByFamilyIncome(context.FamilyIncome);
+        var valueToIncrement = SharedCalcs.CalculateScoreByFamilyIncome(context.FamilyIncome);
 
         context.IncrementScore(valueToIncrement);
 

@@ -3,5 +3,5 @@
 // Observer interface
 public interface IObserver<TContext>
 {
-    void Update(TContext? context);
+    Task Update(TContext? context);
 }

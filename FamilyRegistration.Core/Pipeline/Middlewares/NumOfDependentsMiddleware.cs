@@ -1,13 +1,13 @@
 ﻿using FamilyRegistration.Core.Calculators;
 using MiddlewarePipelineLib;
 
-namespace FamilyRegistration.Core.Pipelines.Middlewares;
+namespace FamilyRegistration.Core.Pipeline.Middlewares;
 
-public class FamilyIncomeScoreMiddleware : IMiddleware<FamilyRegistrationContext>
+public class NumOfDependentsMiddleware : IMiddleware<FamilyRegistrationContext>
 {
     public Task Execute(FamilyRegistrationContext context)
     {
-        var valueToIncrement = ScoreCalculators.CalculateScoreByFamilyIncome(context.FamilyIncome);
+        var valueToIncrement = SharedCalcs.CalculateScoreByNumOfDependents(context.NumOfDependents);
 
         context.IncrementScore(valueToIncrement);
 

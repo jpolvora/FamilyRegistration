@@ -8,7 +8,7 @@ public class NumOfDependentsScoreDecorator : ScoreDecorator
 
     public override Task Execute(FamilyRegistrationContext context)
     {
-        var valueToIncrement = ScoreCalculators.CalculateScoreByNumOfDependents(context.NumOfDependents);
+        var valueToIncrement = SharedCalcs.CalculateScoreByNumOfDependents(context.NumOfDependents);
 
         context.IncrementScore(valueToIncrement);
 

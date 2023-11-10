@@ -14,6 +14,5 @@ public abstract class AbstractObserver : IObserver<FamilyRegistrationContext>
 
     }
 
-
-    public abstract void Update(FamilyRegistrationContext? value);
+    public abstract Task Update(FamilyRegistrationContext? value);
 }

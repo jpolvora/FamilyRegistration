@@ -6,11 +6,10 @@ public class ConcreteSubject : ISubject<FamilyRegistrationContext>
     private readonly List<IObserver<FamilyRegistrationContext>> _observers = new();
     private FamilyRegistrationContext? _state;
 
-    public void SetState(FamilyRegistrationContext value)
+    public async Task SetState(FamilyRegistrationContext value)
     {
         _state = value;
-        Notify();
-
+        await Notify();
     }
 
     public void Attach(IObserver<FamilyRegistrationContext> observer)
@@ -31,11 +30,11 @@ public class ConcreteSubject : ISubject<FamilyRegistrationContext>
     //    }
     //}
 
-    public void Notify()
+    public async Task Notify()
     {
         foreach (var observer in _observers)
         {
-            observer.Update(_state);
+            await observer.Update(_state);
         }
     }
 

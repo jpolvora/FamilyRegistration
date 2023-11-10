@@ -1,5 +1,5 @@
 ﻿using FamilyRegistration.Core;
-using FamilyRegistration.Core.Pipelines.Middlewares;
+using FamilyRegistration.Core.Pipeline.Middlewares;
 using FluentAssertions;
 
 namespace FamilyRegistration.Tests.PipelineTests;

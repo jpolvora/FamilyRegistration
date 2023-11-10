@@ -1,6 +1,6 @@
 ﻿using MiddlewarePipelineLib;
 
-namespace FamilyRegistration.Core.Pipelines.Middlewares;
+namespace FamilyRegistration.Core.Pipeline.Middlewares;
 
 public class ThrowExceptionMiddleware : IMiddleware<FamilyRegistrationContext>
 {

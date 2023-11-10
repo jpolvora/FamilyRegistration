@@ -5,5 +5,5 @@ public interface ISubject<TContext> : IDisposable
 {
     void Attach(IObserver<TContext> observer);
     void Detach(IObserver<TContext> observer);
-    void Notify();
+    Task Notify();
 }

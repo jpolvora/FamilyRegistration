@@ -1,6 +1,6 @@
 using FamilyRegistration.Core;
-using FamilyRegistration.Core.Pipelines;
-using FamilyRegistration.Core.Pipelines.Middlewares;
+using FamilyRegistration.Core.Pipeline;
+using FamilyRegistration.Core.Pipeline.Middlewares;
 using FluentAssertions;
 using MiddlewarePipelineLib;
 

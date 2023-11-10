@@ -1,7 +1,7 @@
-﻿using FamilyRegistration.Core.Pipelines.Middlewares;
+﻿using FamilyRegistration.Core.Pipeline.Middlewares;
 using MiddlewarePipelineLib;
 
-namespace FamilyRegistration.Core.Pipelines;
+namespace FamilyRegistration.Core.Pipeline;
 
 public class CustomPipeline : MiddlewarePipeline<FamilyRegistrationContext>
 {

@@ -14,8 +14,8 @@ public class ProcessDataWithTransactionScript : IProcessDataStrategy
             var context = inputItem.AdaptToFamilyRegistrationContext();
 
             int score = 0;
-            score += ScoreCalculators.CalculateScoreByFamilyIncome(context.FamilyIncome);
-            score += ScoreCalculators.CalculateScoreByNumOfDependents(context.NumOfDependents);
+            score += SharedCalcs.CalculateScoreByFamilyIncome(context.FamilyIncome);
+            score += SharedCalcs.CalculateScoreByNumOfDependents(context.NumOfDependents);
             context.IncrementScore(score);
 
             var outputItem = context.AdaptToOutputItem();

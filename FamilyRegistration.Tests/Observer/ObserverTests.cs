@@ -60,4 +60,31 @@ public class ObserverTests
         //assert
         outputItem.Score.Should().Be(8);
     }
+
+    [Fact]
+    public async void CalcScoreUsingObserversShouldBe3()
+    {
+        //arrange 
+        var inputItem = new InputItem()
+        {
+            Key = Guid.NewGuid().ToString(),
+            NumOfDependents = 5,
+            FamilyIncome = 2000
+        };
+
+        var useCase = new ProcessDataUseCase(new ProcessDataWithObservers());
+
+        //act
+        var input = new Input(new[] { inputItem });
+        var output = await useCase.Execute(input);
+
+        output.Count.Should().Be(1);
+
+        var outputItem = output.Single();
+
+        //assert
+        outputItem.Score.Should().Be(3);
+    }
+
+
 }

@@ -13,13 +13,15 @@ public class NumOfDependentsObserver : AbstractObserver
 
     }
 
-    public override void Update(FamilyRegistrationContext? context)
+    public override async Task Update(FamilyRegistrationContext? context)
     {
         if (context == null) return;
 
-        var valueToIncrement = ScoreCalculators.CalculateScoreByNumOfDependents(context.NumOfDependents);
+        var valueToIncrement = SharedCalcs.CalculateScoreByNumOfDependents(context.NumOfDependents);
 
         context.IncrementScore(valueToIncrement);
+
+        await Task.CompletedTask;
     }
 }
 

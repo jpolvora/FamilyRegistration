@@ -1,6 +1,6 @@
 ﻿namespace FamilyRegistration.Core.Calculators;
 
-public static class ScoreCalculators
+public static class SharedCalcs
 {
     public static int CalculateScoreByFamilyIncome(decimal familyIncome)
     {
