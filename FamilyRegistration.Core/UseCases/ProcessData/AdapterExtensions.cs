@@ -2,7 +2,7 @@
 
 public static class AdapterExtensions
 {
-    public static FamilyRegistrationContext Adapt(this InputItem model)
+    public static FamilyRegistrationContext AdaptToFamilyRegistrationContext(this InputItem model)
     {
         return new FamilyRegistrationContext()
         {
@@ -12,7 +12,7 @@ public static class AdapterExtensions
         };
     }
 
-    public static OutputItem Adapt(this FamilyRegistrationContext context)
+    public static OutputItem AdaptToOutputItem(this FamilyRegistrationContext context)
     {
         return new OutputItem()
         {

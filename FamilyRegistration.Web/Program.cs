@@ -36,7 +36,7 @@ public class Program
         else
         {
             //no design pattern !
-            builder.Services.AddScoped<IProcessDataStrategy, ProcessDataWithNoDesignPattern>();
+            builder.Services.AddScoped<IProcessDataStrategy, ProcessDataWithTransactionScript>();
         }
 
         builder.Services.AddScoped<IProcessDataUseCase, ProcessDataUseCase>();

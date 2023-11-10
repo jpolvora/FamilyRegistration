@@ -16,11 +16,13 @@ public class ProcessDataWithPipeline : IProcessDataStrategy
     {
         var output = new Output();
 
-        var contexts = input.Select(AdapterExtensions.Adapt);
-        foreach (var ctx in contexts)
+        foreach (var inputItem in input)
         {
-            await _pipeline.Execute(ctx);
-            output.Add(ctx.Adapt());
+            var context = inputItem.AdaptToFamilyRegistrationContext();
+            await _pipeline.Execute(context);
+
+            var outputItem = context.AdaptToOutputItem();
+            output.Add(outputItem);
         }
 
         return output;
