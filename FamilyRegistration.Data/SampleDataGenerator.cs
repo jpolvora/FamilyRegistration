@@ -6,16 +6,15 @@ namespace FamilyRegistration.Data;
 
 public class SampleDataGenerator : IDataSource
 {
-
     public SampleDataGenerator() { }
 
-    public IEnumerable<InputItem> GetData(int page, int pageSize)
+    public async Task<IEnumerable<InputItem>> GetData(int page, int pageSize)
     {
-
-        return Generate(pageSize);
+        var result = await Generate(pageSize);
+        return result;
     }
 
-    private static List<InputItem> Generate(int count = 100)
+    private static Task<List<InputItem>> Generate(int count = 100)
     {
         var result = new List<InputItem>();
 
@@ -27,8 +26,7 @@ public class SampleDataGenerator : IDataSource
 
         result.AddRange(family);
 
-
-        return result;
+        return Task.FromResult(result);
     }
 
 

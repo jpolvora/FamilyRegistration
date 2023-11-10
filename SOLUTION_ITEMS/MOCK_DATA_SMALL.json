@@ -1,0 +1,36 @@
+[
+  {
+    "id": "35bf7152-f0a8-44b4-a28f-3488877c71e5",
+    "full_name": "Rosemarie Geroldini",
+    "gender": "Agender",
+    "income": 1707.34,
+    "age": 49,
+    "dependents": [
+      {
+        "income": 1537.35,
+        "age": 30,
+        "full_name": "Amara Dolan"
+      },
+      {
+        "income": null,
+        "age": 35,
+        "full_name": "Ty Oliver"
+      },
+      {
+        "income": 706.36,
+        "age": 74,
+        "full_name": "Claybourne Belderson"
+      },
+      {
+        "income": null,
+        "age": 76,
+        "full_name": "Mozes Roseby"
+      },
+      {
+        "income": 295.73,
+        "age": 76,
+        "full_name": "Renata Caslake"
+      }
+    ]
+  }
+]

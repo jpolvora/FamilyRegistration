@@ -19,10 +19,6 @@ public class Program
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 
-
-        builder.Services.AddScoped<MiddlewarePipeline<FamilyRegistrationContext>, CustomPipeline>();
-        builder.Services.AddScoped<ScoreCalculator, AggregateScoreCalculator>();
-
         builder.Services.AddScoped<IDataSource, SampleDataGenerator>();
 
         string? processarListaStrategy = builder.Configuration.GetValue<string>("CustomSettings:Strategy");
@@ -30,13 +26,17 @@ public class Program
         if (processarListaStrategy == "Pipeline")
         {
             builder.Services.AddScoped<IProcessDataStrategy, ProcessDataWithPipeline>();
+            builder.Services.AddScoped<MiddlewarePipeline<FamilyRegistrationContext>, CustomPipeline>();
         }
         else if (processarListaStrategy == "Decorator")
         {
             builder.Services.AddScoped<IProcessDataStrategy, ProcessDataWithDecorators>();
+            builder.Services.AddScoped<ScoreCalculator, AggregateScoreCalculator>();
         }
 
         builder.Services.AddScoped<IProcessDataUseCase, ProcessarListaDefault>();
+
+        builder.Services.AddControllers();
 
         var app = builder.Build();
 
@@ -49,6 +49,8 @@ public class Program
 
         app.UseHttpsRedirection();
 
+        app.MapControllers();
+
         app.MapGet("/", RouteHandlers.HandleGet)
             .WithName("GetSampleData")
             .WithOpenApi();
@@ -58,8 +60,8 @@ public class Program
             .WithOpenApi();
 
         app.MapPost("/json", RouteHandlers.HandleJsonPost)
-         .WithName("PostJsonFormatOne")
-         .WithOpenApi();
+            .WithName("PostJsonFormatOne")
+            .WithOpenApi();
 
 
         app.Run();
