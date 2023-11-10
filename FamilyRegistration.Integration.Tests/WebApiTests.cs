@@ -55,4 +55,28 @@ public class WebApiTests
         Assert.True(result[0].Score == 6);
         //Console.WriteLine(result);
     }
+
+
+    [Theory]
+    [InlineData("/")]
+    [InlineData("/pipeline")]
+    [InlineData("/decorator")]
+    [InlineData("/transaction")]
+    public async void ShouldGetReportInMultipleEndpoints(string route)
+    {
+        int count = 10;
+
+        var server = new TestWebApplicationFactory<Program>();
+        var client = server.CreateClient();
+        var response = await client.GetAsync($"{route}?count={count}");
+
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+
+        var result = await response.Content.ReadFromJsonAsync<OutputItem[]>();
+
+        Assert.NotNull(result);
+
+        Assert.True(result.Length == count);
+        //Console.WriteLine(result);
+    }
 }

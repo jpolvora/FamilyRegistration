@@ -76,6 +76,11 @@ public class Program
             .WithName("GetSampleDataDecorator")
             .WithOpenApi();
 
+
+        app.MapGet("/transaction", RouteHandlers.HandleGetWithTransactionScriptStrategy)
+            .WithName("GetSampleDataTransaction")
+            .WithOpenApi();
+
         app.Run();
     }
 }

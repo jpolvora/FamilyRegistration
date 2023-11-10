@@ -106,5 +106,27 @@ public class RouteHandlers
 
         return TypedResults.Ok(result);
     }
+
+    public static async Task<Ok<OutputItem[]>> HandleGetWithTransactionScriptStrategy(IDataSource dataSource, int count = 100)
+    {
+        //using var scope = provider.CreateScope();
+        //var dataSource = scope.ServiceProvider.GetRequiredService<IDataSource>();
+        //pegar dados de algum lugar já formatados
+        var data = await dataSource.GetData(1, count);
+
+        //prepara o input par ao UseCase
+        var input = new Input(data);
+
+        //instanciar useCase e executar
+        //o useCase fica responsável por coordenar as adaptações entre input e output da pipeline
+        IProcessDataStrategy strategy = new ProcessDataWithTransactionScript();
+        IProcessDataUseCase useCase = new ProcessDataUseCase(strategy);
+        var output = await useCase.Execute(input);
+
+        //ordenar o output pelo Score mais alto
+        var result = output.OrderByDescending(x => x.Score).ToArray();
+
+        return TypedResults.Ok(result);
+    }
 }
 
