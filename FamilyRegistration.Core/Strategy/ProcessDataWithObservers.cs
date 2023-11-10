@@ -12,7 +12,9 @@ public class ProcessDataWithObservers : IProcessDataStrategy
 
         using var subject = new ConcreteSubject();
 
-        subject.Attach(new NumOfDependentsObserver());
+        _ = new NumOfDependentsObserver(subject);
+
+        //subject.Attach(new NumOfDependentsObserver());
         subject.Attach(new FamilyIncomeObserver());
 
         foreach (var inputItem in input)

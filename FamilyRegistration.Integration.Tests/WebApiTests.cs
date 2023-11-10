@@ -62,6 +62,7 @@ public class WebApiTests
     [InlineData("/pipeline")]
     [InlineData("/decorator")]
     [InlineData("/transaction")]
+    [InlineData("/observer")]
     public async void ShouldGetReportInMultipleEndpoints(string route)
     {
         int count = 10;
