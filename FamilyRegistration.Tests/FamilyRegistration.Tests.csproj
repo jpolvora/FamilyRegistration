@@ -26,7 +26,6 @@
   <ItemGroup>
     <ProjectReference Include="..\FamilyRegistration.Core\FamilyRegistration.Core.csproj" />
     <ProjectReference Include="..\FamilyRegistration.Web\FamilyRegistration.Web.csproj" />
-    <ProjectReference Include="..\MiddlewarePipelineLib\MiddlewarePipelineLib.csproj" />
   </ItemGroup>
 
 </Project>

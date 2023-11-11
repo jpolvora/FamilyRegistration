@@ -1,8 +1,9 @@
 ﻿using FamilyRegistration.Core.Calculators;
+using FamilyRegistration.Patterns.Observer;
 
 namespace FamilyRegistration.Core.Observer.Observers;
 
-public class NumOfDependentsObserver : FamilyRegistrationContextObserver
+public class NumOfDependentsObserver : GenericObserver<FamilyContext>
 {
     public override Task Update(FamilyContext context)
     {

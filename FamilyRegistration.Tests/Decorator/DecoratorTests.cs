@@ -34,7 +34,6 @@ public class DecoratorTests
 
         //assert
         ctx.Score.Should().Be(7);
-        ctx.Errors.Should().HaveCount(0);
     }
 
     [Fact]
@@ -56,10 +55,5 @@ public class DecoratorTests
 
         //assert
         ctx.Score.Should().Be(8);
-        ctx.Errors.Should().HaveCount(0);
     }
-
-    //arrange
-
-
 }

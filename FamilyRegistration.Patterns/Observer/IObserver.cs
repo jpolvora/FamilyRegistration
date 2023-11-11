@@ -1,4 +1,4 @@
-﻿namespace FamilyRegistration.Core.Observer;
+﻿namespace FamilyRegistration.Patterns.Observer;
 
 // Observer interface
 public interface IObserver<TContext>

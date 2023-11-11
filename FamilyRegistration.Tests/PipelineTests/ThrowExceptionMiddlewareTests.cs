@@ -18,7 +18,5 @@ public class ThrowExceptionMiddlewareTests
 
         Func<Task> act = async () => await sut.Execute(ctx);
         await act.Should().ThrowAsync<NotImplementedException>();
-
-        ctx.Errors.Should().HaveCount(0);
     }
 }

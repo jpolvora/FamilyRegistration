@@ -1,10 +1,10 @@
 ﻿using FamilyRegistration.Core.Calculators;
+using FamilyRegistration.Patterns.Observer;
 
 namespace FamilyRegistration.Core.Observer.Observers;
 
-public class FamilyIncomeObserver : FamilyRegistrationContextObserver
+public class FamilyIncomeObserver : GenericObserver<FamilyContext>
 {
-
     public override Task Update(FamilyContext context)
     {
         var valueToIncrement = SharedCalcs.CalculateScoreByFamilyIncome(context.FamilyIncome);

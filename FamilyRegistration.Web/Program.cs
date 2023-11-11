@@ -5,8 +5,8 @@ using FamilyRegistration.Core.Pipeline;
 using FamilyRegistration.Core.Strategy;
 using FamilyRegistration.Core.UseCases.ProcessData;
 using FamilyRegistration.Data;
+using FamilyRegistration.Patterns.Pipeline;
 using FamilyRegistration.Web.Routes;
-using MiddlewarePipelineLib;
 
 public class Program
 {

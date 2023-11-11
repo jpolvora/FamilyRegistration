@@ -1,14 +1,16 @@
 ﻿using FamilyRegistration.Core.Calculators;
+using FamilyRegistration.Patterns.Composite;
 
 namespace FamilyRegistration.Core.Composite;
 
-public class CompositeFamilyIncomeScoreCalculator : ScoreCalculatorComponent
+public class CompositeFamilyIncomeScoreCalculator : AbstractComponent<FamilyContext>
 {
-    public override Task<int> CalculateScore(FamilyContext context)
+    public override Task Execute(FamilyContext context)
     {
         var score = SharedCalcs.CalculateScoreByFamilyIncome(context.FamilyIncome);
+        context.IncrementScore(score);
 
-        return Task.FromResult(score);
+        return Task.CompletedTask;
     }
 }
 

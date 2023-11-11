@@ -1,5 +1,5 @@
 ﻿using FamilyRegistration.Core.Calculators;
-using MiddlewarePipelineLib;
+using FamilyRegistration.Patterns.Pipeline;
 
 namespace FamilyRegistration.Core.Pipeline.Middlewares;
 

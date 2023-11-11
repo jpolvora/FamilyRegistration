@@ -1,4 +1,4 @@
-﻿namespace FamilyRegistration.Core.Observer;
+﻿namespace FamilyRegistration.Patterns.Observer;
 
 // Subject interface
 public interface ISubject<TContext> : IDisposable

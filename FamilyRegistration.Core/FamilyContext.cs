@@ -1,8 +1,6 @@
-﻿using MiddlewarePipelineLib;
+﻿namespace FamilyRegistration.Core;
 
-namespace FamilyRegistration.Core;
-
-public class FamilyContext : MiddlewareContext
+public class FamilyContext
 {
 
     public required string Key { get; set; }

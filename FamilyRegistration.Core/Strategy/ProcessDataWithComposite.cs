@@ -9,18 +9,14 @@ public class ProcessDataWithComposite : IProcessDataStrategy
     {
         var output = new ProcessDataOutput();
 
+        var scoreCalculators = new CompositeScoreCalculator();
+        scoreCalculators.Add(new CompositeNumOfDependentsScoreCalculator());
+        scoreCalculators.Add(new CompositeFamilyIncomeScoreCalculator());
+
         foreach (var inputItem in input)
         {
             var context = inputItem.AdaptToFamilyRegistrationContext();
-
-            var scoreCalculators = new ScoreCalculatorGroup();
-
-            scoreCalculators.Add(new CompositeNumOfDependentsScoreCalculator());
-            scoreCalculators.Add(new CompositeFamilyIncomeScoreCalculator());
-
-            var score = await scoreCalculators.CalculateScore(context);
-
-            context.IncrementScore(score);
+            await scoreCalculators.Execute(context);
 
             var outputItem = context.AdaptToOutputItem();
             output.Add(outputItem);

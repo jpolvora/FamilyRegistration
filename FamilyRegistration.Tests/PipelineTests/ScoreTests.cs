@@ -1,8 +1,8 @@
 using FamilyRegistration.Core;
 using FamilyRegistration.Core.Pipeline;
 using FamilyRegistration.Core.Pipeline.Middlewares;
+using FamilyRegistration.Patterns.Pipeline;
 using FluentAssertions;
-using MiddlewarePipelineLib;
 
 namespace FamilyRegistration.Tests.PipelineTests;
 
@@ -29,7 +29,6 @@ public class ScoreTests
 
         //assert
         ctx.Score.Should().Be(5);
-        ctx.Errors.Should().HaveCount(0);
     }
 
     [Fact]
@@ -53,7 +52,7 @@ public class ScoreTests
 
         //assert
         ctx.Score.Should().Be(3);
-        ctx.Errors.Should().HaveCount(0);
+
     }
 
     [Fact]
@@ -77,7 +76,7 @@ public class ScoreTests
 
         //assert
         ctx.Score.Should().Be(7);
-        ctx.Errors.Should().HaveCount(0);
+
     }
 
 
@@ -102,7 +101,6 @@ public class ScoreTests
 
         //assert
         ctx.Score.Should().Be(8);
-        ctx.Errors.Should().HaveCount(0);
     }
 
     [Fact]
@@ -126,7 +124,6 @@ public class ScoreTests
 
         //assert
         ctx.Score.Should().Be(0);
-        ctx.Errors.Should().HaveCount(0);
     }
 
     [Fact]
@@ -144,11 +141,11 @@ public class ScoreTests
 
         //act
 
-        await pipeline.Execute(ctx);
+        Func<Task> act = async () => await pipeline.Execute(ctx);
 
+        await act.Should().ThrowAsync<NotImplementedException>();
         //assert
         ctx.Score.Should().Be(6);
-        ctx.Errors.Should().HaveCount(1);
     }
 
     [Fact]
@@ -166,11 +163,11 @@ public class ScoreTests
         pipeline.Use(new ThrowExceptionMiddleware());
 
         //act
+        Func<Task> act = async () => await pipeline.Execute(ctx);
+        await act.Should().ThrowAsync<NotImplementedException>();
 
-        await pipeline.Execute(ctx);
 
         //assert
         ctx.Score.Should().Be(6);
-        ctx.Errors.Should().HaveCount(2);
     }
 }

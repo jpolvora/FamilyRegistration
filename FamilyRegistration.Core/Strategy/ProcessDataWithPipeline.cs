@@ -1,5 +1,5 @@
 ﻿using FamilyRegistration.Core.UseCases.ProcessData;
-using MiddlewarePipelineLib;
+using FamilyRegistration.Patterns.Pipeline;
 
 namespace FamilyRegistration.Core.Strategy;
 
