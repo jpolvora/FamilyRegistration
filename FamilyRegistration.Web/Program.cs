@@ -1,12 +1,4 @@
-using FamilyRegistration.Core;
-using FamilyRegistration.Core.Datasources;
-using FamilyRegistration.Core.Decorator;
-using FamilyRegistration.Core.Pipeline;
-using FamilyRegistration.Core.Pipeline.Middlewares;
-using FamilyRegistration.Core.Strategy;
-using FamilyRegistration.Core.UseCases.ProcessData;
-using FamilyRegistration.Data;
-using FamilyRegistration.Patterns.Pipeline;
+using FamilyRegistration.Web.Config;
 using FamilyRegistration.Web.Routes;
 
 public class Program
@@ -20,39 +12,10 @@ public class Program
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 
-        //builder.Services.AddHostedService<ConsumeRabbitMQHostedService>();
+        //builder.Services.AddHostedService<ConsumeRabbitMQHostedService>();        
 
-
-        builder.Services.AddScoped<IDataSource, SampleDataGenerator>();
-
-        string? processarListaStrategy = builder.Configuration.GetValue<string>("CustomSettings:Strategy");
-
-        if (processarListaStrategy == "Pipeline")
-        {
-            builder.Services.AddScoped<IProcessDataStrategy, ProcessDataWithPipeline>();
-            builder.Services.AddScoped<Pipeline<FamilyContext>, ScoreCalculatorPipeline>();
-            builder.Services.AddScoped<IMiddleware<FamilyContext>, FamilyIncomeScoreMiddleware>();
-            builder.Services.AddScoped<IMiddleware<FamilyContext>, NumOfDependentsMiddleware>();
-        }
-        else if (processarListaStrategy == "Decorator")
-        {
-            builder.Services.AddScoped<IProcessDataStrategy, ProcessDataWithDecorator>();
-            builder.Services.AddScoped<AbstractScoreCalculator, AggregateScoreCalculator>();
-        }
-        else if (processarListaStrategy == "Observer")
-        {
-            builder.Services.AddScoped<IProcessDataStrategy, ProcessDataWithObservers>();
-        }
-        else if (processarListaStrategy == "Composite")
-        {
-            builder.Services.AddScoped<IProcessDataStrategy, ProcessDataWithComposite>();
-        }
-        else
-        {
-            builder.Services.AddScoped<IProcessDataStrategy, ProcessDataWithTransactionScript>();
-        }
-
-        builder.Services.AddScoped<IProcessDataUseCase, ProcessDataUseCase>();
+        //custom config class
+        builder.Services.ConfigureCustomSettings(builder.Configuration);
 
         builder.Services.AddControllers();
 
