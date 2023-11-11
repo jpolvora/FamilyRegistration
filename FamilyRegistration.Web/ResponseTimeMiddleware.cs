@@ -21,7 +21,7 @@ public class ResponseTimeMiddleware
             watch.Stop();
             var responseTimeForCompleteRequest = watch.ElapsedMilliseconds;
             // Add the Response time information in the Response headers.   
-            context.Response.Headers[RESPONSE_HEADER_RESPONSE_TIME] = responseTimeForCompleteRequest.ToString();
+            context.Response.Headers[RESPONSE_HEADER_RESPONSE_TIME] = responseTimeForCompleteRequest.ToString("");
             return Task.CompletedTask;
         });
         // Call the next delegate/middleware in the pipeline   

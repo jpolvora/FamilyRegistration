@@ -19,7 +19,7 @@ public class ScoreTests
             FamilyIncome = 901
         };
 
-        var pipeline = new MiddlewarePipeline<FamilyContext>();
+        var pipeline = new Pipeline<FamilyContext>();
         pipeline.Use(new FamilyIncomeScoreMiddleware());
         pipeline.Use(new NumOfDependentsMiddleware());
 
@@ -43,7 +43,7 @@ public class ScoreTests
             FamilyIncome = 2000
         };
 
-        var pipeline = new MiddlewarePipeline<FamilyContext>();
+        var pipeline = new Pipeline<FamilyContext>();
         pipeline.Use(new FamilyIncomeScoreMiddleware());
         pipeline.Use(new NumOfDependentsMiddleware());
 
@@ -67,7 +67,7 @@ public class ScoreTests
             FamilyIncome = 900
         };
 
-        var pipeline = new MiddlewarePipeline<FamilyContext>();
+        var pipeline = new Pipeline<FamilyContext>();
         pipeline.Use(new FamilyIncomeScoreMiddleware());
         pipeline.Use(new NumOfDependentsMiddleware());
 
@@ -92,7 +92,7 @@ public class ScoreTests
             FamilyIncome = 899
         };
 
-        var pipeline = new MiddlewarePipeline<FamilyContext>();
+        var pipeline = new Pipeline<FamilyContext>();
         pipeline.Use(new FamilyIncomeScoreMiddleware());
         pipeline.Use(new NumOfDependentsMiddleware());
 
@@ -116,7 +116,7 @@ public class ScoreTests
             FamilyIncome = 1501
         };
 
-        var pipeline = new MiddlewarePipeline<FamilyContext>();
+        var pipeline = new Pipeline<FamilyContext>();
         pipeline.Use(new FamilyIncomeScoreMiddleware());
         pipeline.Use(new NumOfDependentsMiddleware());
 

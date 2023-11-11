@@ -5,9 +5,9 @@ namespace FamilyRegistration.Core.Strategy;
 
 public class ProcessDataWithPipeline : IProcessDataStrategy
 {
-    private readonly MiddlewarePipeline<FamilyContext> _pipeline;
+    private readonly Pipeline<FamilyContext> _pipeline;
 
-    public ProcessDataWithPipeline(MiddlewarePipeline<FamilyContext> pipeline)
+    public ProcessDataWithPipeline(Pipeline<FamilyContext> pipeline)
     {
         _pipeline = pipeline;
     }

@@ -18,7 +18,7 @@ public static class ProcessData
 
     public static IProcessDataUseCase WithPipeline()
     {
-        return new ProcessDataUseCase(new ProcessDataWithPipeline(new CustomPipeline()));
+        return new ProcessDataUseCase(new ProcessDataWithPipeline(new ScoreCalculatorPipeline()));
     }
 
     public static IProcessDataUseCase WithTransactionScript()

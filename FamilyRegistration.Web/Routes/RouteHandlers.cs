@@ -97,7 +97,7 @@ public class RouteHandlers
 
         //instanciar useCase e executar
         //o useCase fica responsável por coordenar as adaptações entre input e output da pipeline
-        IProcessDataStrategy strategy = new ProcessDataWithPipeline(new CustomPipeline());
+        IProcessDataStrategy strategy = new ProcessDataWithPipeline(new ScoreCalculatorPipeline());
         IProcessDataUseCase useCase = new ProcessDataUseCase(strategy);
         var output = await useCase.Execute(input);
 
@@ -140,6 +140,26 @@ public class RouteHandlers
         //instanciar useCase e executar
         //o useCase fica responsável por coordenar as adaptações entre input e output da pipeline
         IProcessDataStrategy strategy = new ProcessDataWithObservers();
+        IProcessDataUseCase useCase = new ProcessDataUseCase(strategy);
+        var output = await useCase.Execute(input);
+
+        //ordenar o output pelo Score mais alto
+        var result = output.OrderByDescending(x => x.Score).ToArray();
+
+        return TypedResults.Ok(result);
+    }
+
+    public static async Task<Ok<ProcessDataOutputItem[]>> HandleGetWithObserverComposite(IDataSource dataSource, int count = 100)
+    {
+        //pegar dados de algum lugar já formatados
+        var data = await dataSource.GetData(1, count);
+
+        //prepara o input par ao UseCase
+        var input = new ProcessDataInput(data);
+
+        //instanciar useCase e executar
+        //o useCase fica responsável por coordenar as adaptações entre input e output da pipeline
+        IProcessDataStrategy strategy = new ProcessDataWithComposite();
         IProcessDataUseCase useCase = new ProcessDataUseCase(strategy);
         var output = await useCase.Execute(input);
 

@@ -29,7 +29,7 @@ public class Program
         if (processarListaStrategy == "Pipeline")
         {
             builder.Services.AddScoped<IProcessDataStrategy, ProcessDataWithPipeline>();
-            builder.Services.AddScoped<MiddlewarePipeline<FamilyContext>, CustomPipeline>();
+            builder.Services.AddScoped<Pipeline<FamilyContext>, ScoreCalculatorPipeline>();
         }
         else if (processarListaStrategy == "Decorator")
         {
@@ -39,6 +39,10 @@ public class Program
         else if (processarListaStrategy == "Observer")
         {
             builder.Services.AddScoped<IProcessDataStrategy, ProcessDataWithObservers>();
+        }
+        else if (processarListaStrategy == "Composite")
+        {
+            builder.Services.AddScoped<IProcessDataStrategy, ProcessDataWithComposite>();
         }
         else
         {
@@ -91,6 +95,10 @@ public class Program
 
         app.MapGet("/observer", RouteHandlers.HandleGetWithObserverStrategy)
             .WithName("GetSampleDataObserver")
+            .WithOpenApi();
+
+        app.MapGet("/composite", RouteHandlers.HandleGetWithObserverComposite)
+            .WithName("GetSampleDataComposite")
             .WithOpenApi();
 
         app.Run();
