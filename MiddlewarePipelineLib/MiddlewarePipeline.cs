@@ -1,6 +1,6 @@
 ﻿namespace MiddlewarePipelineLib;
 
-public class MiddlewarePipeline<TContext> where TContext : Context
+public class MiddlewarePipeline<TContext> where TContext : MiddlewareContext
 {
     private readonly List<IMiddleware<TContext>> _middlewares = new();
 

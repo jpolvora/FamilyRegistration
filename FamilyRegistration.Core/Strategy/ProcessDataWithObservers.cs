@@ -11,9 +11,6 @@ public class ProcessDataWithObservers : IProcessDataStrategy
         var output = new ProcessDataOutput();
 
         using var publisher = new FamilyRegistrationContextPublisher();
-
-        //_ = new NumOfDependentsObserver(subject);
-
         publisher.Register(new NumOfDependentsObserver());
         publisher.Register(new FamilyIncomeObserver());
 

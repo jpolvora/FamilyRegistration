@@ -2,25 +2,16 @@
 
 namespace FamilyRegistration.Core.Observer.Observers;
 
-public class FamilyIncomeObserver : AbstractObserver
+public class FamilyIncomeObserver : FamilyRegistrationContextObserver
 {
-    public FamilyIncomeObserver()
-    {
-    }
 
-    public FamilyIncomeObserver(ISubject<FamilyRegistrationContext> subject) : base(subject)
+    public override Task Update(FamilyContext context)
     {
-    }
-
-    public override async Task Update(FamilyRegistrationContext? context)
-    {
-        if (context == null) return;
-
         var valueToIncrement = SharedCalcs.CalculateScoreByFamilyIncome(context.FamilyIncome);
 
         context.IncrementScore(valueToIncrement);
 
-        await Task.CompletedTask;
+        return Task.CompletedTask;
     }
 }
 

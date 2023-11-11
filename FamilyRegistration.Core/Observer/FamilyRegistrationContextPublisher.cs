@@ -1,10 +1,10 @@
 ﻿namespace FamilyRegistration.Core.Observer;
 
-public class FamilyRegistrationContextPublisher : ISubject<FamilyRegistrationContext>
+public class FamilyRegistrationContextPublisher : ISubject<FamilyContext>
 {
-    private readonly List<IObserver<FamilyRegistrationContext>> _observers = new();
+    private readonly List<IObserver<FamilyContext>> _observers = new();
 
-    public async Task Publish(FamilyRegistrationContext value)
+    public async Task Publish(FamilyContext value)
     {
         foreach (var observer in _observers)
         {
@@ -12,12 +12,12 @@ public class FamilyRegistrationContextPublisher : ISubject<FamilyRegistrationCon
         }
     }
 
-    public void Register(IObserver<FamilyRegistrationContext> observer)
+    public void Register(IObserver<FamilyContext> observer)
     {
         _observers.Add(observer);
     }
 
-    public void Detach(IObserver<FamilyRegistrationContext> observer)
+    public void Detach(IObserver<FamilyContext> observer)
     {
         _observers.Remove(observer);
     }

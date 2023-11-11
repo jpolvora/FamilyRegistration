@@ -3,9 +3,9 @@ using MiddlewarePipelineLib;
 
 namespace FamilyRegistration.Core.Pipeline.Middlewares;
 
-public class FamilyIncomeScoreMiddleware : IMiddleware<FamilyRegistrationContext>
+public class FamilyIncomeScoreMiddleware : IMiddleware<FamilyContext>
 {
-    public Task Execute(FamilyRegistrationContext context)
+    public Task Execute(FamilyContext context)
     {
         var valueToIncrement = SharedCalcs.CalculateScoreByFamilyIncome(context.FamilyIncome);
 

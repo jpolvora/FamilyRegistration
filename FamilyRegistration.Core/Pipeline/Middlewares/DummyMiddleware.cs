@@ -2,9 +2,9 @@
 
 namespace FamilyRegistration.Core.Pipeline.Middlewares;
 
-public class DummyMiddleware : IMiddleware<FamilyRegistrationContext>
+public class DummyMiddleware : IMiddleware<FamilyContext>
 {
-    public Task Execute(FamilyRegistrationContext context)
+    public Task Execute(FamilyContext context)
     {
         return Task.CompletedTask;
     }

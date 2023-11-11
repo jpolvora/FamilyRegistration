@@ -2,9 +2,9 @@
 
 namespace FamilyRegistration.Core.Pipeline.Middlewares;
 
-public class ThrowExceptionMiddleware : IMiddleware<FamilyRegistrationContext>
+public class ThrowExceptionMiddleware : IMiddleware<FamilyContext>
 {
-    public Task Execute(FamilyRegistrationContext context)
+    public Task Execute(FamilyContext context)
     {
         throw new NotImplementedException();
     }

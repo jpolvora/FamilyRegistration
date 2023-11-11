@@ -9,7 +9,7 @@ public class ThrowExceptionMiddlewareTests
     [Fact]
     public async void ShouldContainErrors()
     {
-        var ctx = new FamilyRegistrationContext()
+        var ctx = new FamilyContext()
         {
             Key = Guid.NewGuid().ToString(),
         };

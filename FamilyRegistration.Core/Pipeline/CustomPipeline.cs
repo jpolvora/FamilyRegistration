@@ -3,7 +3,7 @@ using MiddlewarePipelineLib;
 
 namespace FamilyRegistration.Core.Pipeline;
 
-public class CustomPipeline : MiddlewarePipeline<FamilyRegistrationContext>
+public class CustomPipeline : MiddlewarePipeline<FamilyContext>
 {
     public CustomPipeline()
     {

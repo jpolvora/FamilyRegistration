@@ -3,7 +3,7 @@ using FamilyRegistration.Core.Pipeline.Middlewares;
 using MiddlewarePipelineLib;
 
 namespace FamilyRegistration.Core.Pipeline;
-public class ScorePipeline : MiddlewarePipeline<FamilyRegistrationContext>
+public class ScorePipeline : MiddlewarePipeline<FamilyContext>
 {
     public ScorePipeline()
     {
@@ -28,7 +28,7 @@ public class ScorePipeline : MiddlewarePipeline<FamilyRegistrationContext>
             {
                 if (middleware == null) continue;
 
-                if (Activator.CreateInstance(middleware.GetType()) is not IMiddleware<FamilyRegistrationContext> instance) continue;
+                if (Activator.CreateInstance(middleware.GetType()) is not IMiddleware<FamilyContext> instance) continue;
 
                 Use(instance);
             }

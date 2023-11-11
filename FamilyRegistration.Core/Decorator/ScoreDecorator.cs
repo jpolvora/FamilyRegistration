@@ -8,7 +8,7 @@ public abstract class ScoreDecorator : AbstractScoreCalculator
         _wrapped = wrapped;
     }
 
-    public override Task Execute(FamilyRegistrationContext context)
+    public override Task Execute(FamilyContext context)
     {
         return _wrapped.Execute(context);
     }

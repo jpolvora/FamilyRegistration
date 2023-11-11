@@ -3,9 +3,9 @@ using MiddlewarePipelineLib;
 
 namespace FamilyRegistration.Core.Pipeline.Middlewares;
 
-public class NumOfDependentsMiddleware : IMiddleware<FamilyRegistrationContext>
+public class NumOfDependentsMiddleware : IMiddleware<FamilyContext>
 {
-    public Task Execute(FamilyRegistrationContext context)
+    public Task Execute(FamilyContext context)
     {
         var valueToIncrement = SharedCalcs.CalculateScoreByNumOfDependents(context.NumOfDependents);
 

@@ -20,7 +20,7 @@ public class DecoratorTests
     public async void CalcScoreUsingDecoratorsShouldReturn_7()
     {
         //arrange 
-        var ctx = new FamilyRegistrationContext()
+        var ctx = new FamilyContext()
         {
             Key = Guid.NewGuid().ToString(),
             NumOfDependents = 2,
@@ -42,7 +42,7 @@ public class DecoratorTests
     {
         //arrange 
         //arrange
-        var ctx = new FamilyRegistrationContext()
+        var ctx = new FamilyContext()
         {
             Key = Guid.NewGuid().ToString(),
             NumOfDependents = 3,

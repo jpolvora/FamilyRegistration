@@ -1,6 +1,6 @@
 ﻿namespace MiddlewarePipelineLib;
 
-public abstract class Context
+public abstract class MiddlewareContext
 {
     public List<Exception> Errors { get; } = new List<Exception>();
 

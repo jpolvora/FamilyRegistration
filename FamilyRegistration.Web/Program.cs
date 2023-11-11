@@ -29,7 +29,7 @@ public class Program
         if (processarListaStrategy == "Pipeline")
         {
             builder.Services.AddScoped<IProcessDataStrategy, ProcessDataWithPipeline>();
-            builder.Services.AddScoped<MiddlewarePipeline<FamilyRegistrationContext>, CustomPipeline>();
+            builder.Services.AddScoped<MiddlewarePipeline<FamilyContext>, CustomPipeline>();
         }
         else if (processarListaStrategy == "Decorator")
         {
