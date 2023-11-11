@@ -5,15 +5,28 @@ namespace FamilyRegistration.Core.Pipeline;
 
 public class ScoreCalculatorPipeline : Pipeline<FamilyContext>
 {
-    public ScoreCalculatorPipeline()
+    public ScoreCalculatorPipeline(IEnumerable<IMiddleware<FamilyContext>> middlewares)
     {
-        Use(new NumOfDependentsMiddleware());
-        Use(new FamilyIncomeScoreMiddleware());
+        foreach (var middleware in middlewares)
+        {
+            Use(middleware);
+        }
+    }
+
+    public static ScoreCalculatorPipeline CreateProductionPipeline()
+    {
+        var middlewares = new IMiddleware<FamilyContext>[]
+        {
+            new FamilyIncomeScoreMiddleware(),
+            new NumOfDependentsMiddleware()
+        };
+
+        return new ScoreCalculatorPipeline(middlewares);
     }
 
     public static ScoreCalculatorPipeline CreateTestPipeline()
     {
-        var pipeline = new ScoreCalculatorPipeline();
+        var pipeline = CreateProductionPipeline();
         pipeline.Use(new DummyMiddleware());
         pipeline.Use(new ThrowExceptionMiddleware());
 

@@ -97,7 +97,7 @@ public class RouteHandlers
 
         //instanciar useCase e executar
         //o useCase fica responsável por coordenar as adaptações entre input e output da pipeline
-        IProcessDataStrategy strategy = new ProcessDataWithPipeline(new ScoreCalculatorPipeline());
+        IProcessDataStrategy strategy = new ProcessDataWithPipeline(ScoreCalculatorPipeline.CreateProductionPipeline());
         IProcessDataUseCase useCase = new ProcessDataUseCase(strategy);
         var output = await useCase.Execute(input);
 

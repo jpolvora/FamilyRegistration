@@ -2,6 +2,7 @@ using FamilyRegistration.Core;
 using FamilyRegistration.Core.Datasources;
 using FamilyRegistration.Core.Decorator;
 using FamilyRegistration.Core.Pipeline;
+using FamilyRegistration.Core.Pipeline.Middlewares;
 using FamilyRegistration.Core.Strategy;
 using FamilyRegistration.Core.UseCases.ProcessData;
 using FamilyRegistration.Data;
@@ -30,6 +31,8 @@ public class Program
         {
             builder.Services.AddScoped<IProcessDataStrategy, ProcessDataWithPipeline>();
             builder.Services.AddScoped<Pipeline<FamilyContext>, ScoreCalculatorPipeline>();
+            builder.Services.AddScoped<IMiddleware<FamilyContext>, FamilyIncomeScoreMiddleware>();
+            builder.Services.AddScoped<IMiddleware<FamilyContext>, NumOfDependentsMiddleware>();
         }
         else if (processarListaStrategy == "Decorator")
         {
