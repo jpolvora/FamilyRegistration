@@ -7,7 +7,7 @@ public class ScorePipelineTests
     [Fact]
     public void PipelineSizeShouldBe4()
     {
-        var pipeline = new ScorePipeline();
+        var pipeline = ScoreCalculatorPipeline.CreateTestPipeline();
 
         pipeline.Count.Should().Be(4);
     }

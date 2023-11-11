@@ -140,7 +140,7 @@ public class ScoreTests
             FamilyIncome = 1111
         };
 
-        var pipeline = new ScorePipeline();
+        var pipeline = ScoreCalculatorPipeline.CreateTestPipeline();
 
         //act
 
@@ -162,7 +162,7 @@ public class ScoreTests
             FamilyIncome = 1111
         };
 
-        var pipeline = new ScorePipeline();
+        var pipeline = ScoreCalculatorPipeline.CreateTestPipeline();
         pipeline.Use(new ThrowExceptionMiddleware());
 
         //act

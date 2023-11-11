@@ -25,4 +25,9 @@ public static class ProcessData
     {
         return new ProcessDataUseCase(new ProcessDataWithTransactionScript());
     }
+
+    public static IProcessDataUseCase WithComposite()
+    {
+        return new ProcessDataUseCase(new ProcessDataWithComposite());
+    }
 }
