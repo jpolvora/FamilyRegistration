@@ -3,7 +3,7 @@
 // Subject interface
 public interface ISubject<TContext> : IDisposable
 {
-    void Attach(IObserver<TContext> observer);
+    void Register(IObserver<TContext> observer);
     void Detach(IObserver<TContext> observer);
-    Task Notify();
+    Task Publish(TContext value);
 }

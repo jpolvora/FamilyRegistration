@@ -9,7 +9,7 @@ public class TransactScriptTests
     public async void CalcScoreUsingTransactionScriptShouldBe7()
     {
         //arrange 
-        var inputItem = new InputItem()
+        var inputItem = new ProcessDataInputItem()
         {
             Key = Guid.NewGuid().ToString(),
             NumOfDependents = 2,
@@ -19,7 +19,7 @@ public class TransactScriptTests
         var useCase = ProcessData.WithTransactionScript();
 
         //act
-        var input = new Input(new[] { inputItem });
+        var input = new ProcessDataInput(new[] { inputItem });
         var output = await useCase.Execute(input);
 
         output.Count.Should().Be(1);
@@ -34,7 +34,7 @@ public class TransactScriptTests
     public async void CalcScoreUsingTransactionScriptShouldBe5()
     {
         //arrange 
-        var inputItem = new InputItem()
+        var inputItem = new ProcessDataInputItem()
         {
             Key = Guid.NewGuid().ToString(),
             NumOfDependents = 1,
@@ -44,7 +44,7 @@ public class TransactScriptTests
         var useCase = ProcessData.WithTransactionScript();
 
         //act
-        var input = new Input(new[] { inputItem });
+        var input = new ProcessDataInput(new[] { inputItem });
         var output = await useCase.Execute(input);
 
         output.Count.Should().Be(1);
@@ -59,7 +59,7 @@ public class TransactScriptTests
     public async void CalcScoreUsingTransactionScriptShouldBe3()
     {
         //arrange 
-        var inputItem = new InputItem()
+        var inputItem = new ProcessDataInputItem()
         {
             Key = Guid.NewGuid().ToString(),
             NumOfDependents = 5,
@@ -69,7 +69,7 @@ public class TransactScriptTests
         var useCase = ProcessData.WithTransactionScript();
 
         //act
-        var input = new Input(new[] { inputItem });
+        var input = new ProcessDataInput(new[] { inputItem });
         var output = await useCase.Execute(input);
 
         output.Count.Should().Be(1);

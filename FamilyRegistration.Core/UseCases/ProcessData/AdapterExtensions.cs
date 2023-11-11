@@ -2,7 +2,7 @@
 
 public static class AdapterExtensions
 {
-    public static FamilyRegistrationContext AdaptToFamilyRegistrationContext(this InputItem model)
+    public static FamilyRegistrationContext AdaptToFamilyRegistrationContext(this ProcessDataInputItem model)
     {
         return new FamilyRegistrationContext()
         {
@@ -12,9 +12,9 @@ public static class AdapterExtensions
         };
     }
 
-    public static OutputItem AdaptToOutputItem(this FamilyRegistrationContext context)
+    public static ProcessDataOutputItem AdaptToOutputItem(this FamilyRegistrationContext context)
     {
-        return new OutputItem()
+        return new ProcessDataOutputItem()
         {
             Key = context.Key,
             FamilyIncome = context.FamilyIncome,
@@ -23,8 +23,8 @@ public static class AdapterExtensions
         };
     }
 
-    public static Input AsInput(this IEnumerable<InputItem> inputItems)
+    public static ProcessDataInput AsInput(this IEnumerable<ProcessDataInputItem> inputItems)
     {
-        return new Input(inputItems);
+        return new ProcessDataInput(inputItems);
     }
 }

@@ -6,7 +6,7 @@ public abstract class AbstractObserver : IObserver<FamilyRegistrationContext>
 
     public AbstractObserver(ISubject<FamilyRegistrationContext> subject)
     {
-        subject.Attach(this);
+        subject.Register(this);
     }
 
     public AbstractObserver()

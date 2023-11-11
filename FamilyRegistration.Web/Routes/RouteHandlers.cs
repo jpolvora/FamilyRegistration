@@ -10,13 +10,13 @@ namespace FamilyRegistration.Web.Routes;
 
 public class RouteHandlers
 {
-    public static async Task<Ok<OutputItem[]>> HandleGet(IDataSource dataSource, IProcessDataUseCase useCase, int count = 100)
+    public static async Task<Ok<ProcessDataOutputItem[]>> HandleGet(IDataSource dataSource, IProcessDataUseCase useCase, int count = 100)
     {
         //pegar dados de algum lugar já formatados
         var data = await dataSource.GetData(1, count);
 
         //prepara o input par ao UseCase
-        var input = new Input(data);
+        var input = new ProcessDataInput(data);
 
         //instanciar useCase e executar
         //o useCase fica responsável por coordenar as adaptações entre input e output da pipeline
@@ -29,10 +29,10 @@ public class RouteHandlers
         return TypedResults.Ok(result);
     }
 
-    public static async Task<Ok<OutputItem[]>> HandlePost(InputItem[] requestData, IProcessDataUseCase useCase)
+    public static async Task<Ok<ProcessDataOutputItem[]>> HandlePost(ProcessDataInputItem[] items, IProcessDataUseCase useCase)
     {
         //pegar dados de algum lugar        
-        var input = new Input(requestData);
+        var input = new ProcessDataInput(items);
 
         //instanciar useCase e executar
         //o useCase fica responsável por coordenar as adaptações entre input e output da pipeline
@@ -45,7 +45,7 @@ public class RouteHandlers
         return TypedResults.Ok(result);
     }
 
-    public static async Task<Ok<OutputItem[]>> HandleJsonPost(JsonFormatOne[] requestData, IProcessDataUseCase useCase)
+    public static async Task<Ok<ProcessDataOutputItem[]>> HandleJsonPost(JsonFormatOne[] requestData, IProcessDataUseCase useCase)
     {
         //convert
 
@@ -63,7 +63,7 @@ public class RouteHandlers
         return TypedResults.Ok(result);
     }
 
-    public static async Task<Ok<OutputItem[]>> HandleGetWithDecoratorStrattegy(IDataSource dataSource, int count = 100)
+    public static async Task<Ok<ProcessDataOutputItem[]>> HandleGetWithDecoratorStrattegy(IDataSource dataSource, int count = 100)
     {
         //using var scope = provider.CreateScope();
         //var dataSource = scope.ServiceProvider.GetRequiredService<IDataSource>();
@@ -71,7 +71,7 @@ public class RouteHandlers
         var data = await dataSource.GetData(1, count);
 
         //prepara o input par ao UseCase
-        var input = new Input(data);
+        var input = new ProcessDataInput(data);
 
         //instanciar useCase e executar
         //o useCase fica responsável por coordenar as adaptações entre input e output da pipeline
@@ -85,7 +85,7 @@ public class RouteHandlers
         return TypedResults.Ok(result);
     }
 
-    public static async Task<Ok<OutputItem[]>> HandleGetWithPipelineStrategy(IDataSource dataSource, int count = 100)
+    public static async Task<Ok<ProcessDataOutputItem[]>> HandleGetWithPipelineStrategy(IDataSource dataSource, int count = 100)
     {
         //using var scope = provider.CreateScope();
         //var dataSource = scope.ServiceProvider.GetRequiredService<IDataSource>();
@@ -93,7 +93,7 @@ public class RouteHandlers
         var data = await dataSource.GetData(1, count);
 
         //prepara o input par ao UseCase
-        var input = new Input(data);
+        var input = new ProcessDataInput(data);
 
         //instanciar useCase e executar
         //o useCase fica responsável por coordenar as adaptações entre input e output da pipeline
@@ -107,7 +107,7 @@ public class RouteHandlers
         return TypedResults.Ok(result);
     }
 
-    public static async Task<Ok<OutputItem[]>> HandleGetWithTransactionScriptStrategy(IDataSource dataSource, int count = 100)
+    public static async Task<Ok<ProcessDataOutputItem[]>> HandleGetWithTransactionScriptStrategy(IDataSource dataSource, int count = 100)
     {
         //using var scope = provider.CreateScope();
         //var dataSource = scope.ServiceProvider.GetRequiredService<IDataSource>();
@@ -115,7 +115,7 @@ public class RouteHandlers
         var data = await dataSource.GetData(1, count);
 
         //prepara o input par ao UseCase
-        var input = new Input(data);
+        var input = new ProcessDataInput(data);
 
         //instanciar useCase e executar
         //o useCase fica responsável por coordenar as adaptações entre input e output da pipeline
@@ -129,13 +129,13 @@ public class RouteHandlers
         return TypedResults.Ok(result);
     }
 
-    public static async Task<Ok<OutputItem[]>> HandleGetWithObserverStrategy(IDataSource dataSource, int count = 100)
+    public static async Task<Ok<ProcessDataOutputItem[]>> HandleGetWithObserverStrategy(IDataSource dataSource, int count = 100)
     {
         //pegar dados de algum lugar já formatados
         var data = await dataSource.GetData(1, count);
 
         //prepara o input par ao UseCase
-        var input = new Input(data);
+        var input = new ProcessDataInput(data);
 
         //instanciar useCase e executar
         //o useCase fica responsável por coordenar as adaptações entre input e output da pipeline

@@ -12,9 +12,9 @@ public class ProcessDataWithDecorator : IProcessDataStrategy
         _scoreCalculator = scoreCalculator;
     }
 
-    public async Task<Output> Execute(Input input)
+    public async Task<ProcessDataOutput> Execute(ProcessDataInput input)
     {
-        var output = new Output();
+        var output = new ProcessDataOutput();
 
         foreach (var inputItem in input)
         {

@@ -1,3 +1,3 @@
 ﻿namespace FamilyRegistration.Core.UseCases.ProcessData;
 
-public interface IProcessDataUseCase : IUseCase<Input, Output> { }
+public interface IProcessDataUseCase : IUseCase<ProcessDataInput, ProcessDataOutput> { }

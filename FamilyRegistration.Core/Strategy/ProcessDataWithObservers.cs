@@ -6,23 +6,23 @@ namespace FamilyRegistration.Core.Strategy;
 
 public class ProcessDataWithObservers : IProcessDataStrategy
 {
-    public async Task<Output> Execute(Input input)
+    public async Task<ProcessDataOutput> Execute(ProcessDataInput input)
     {
-        var output = new Output();
+        var output = new ProcessDataOutput();
 
-        using var subject = new ConcreteSubject();
+        using var publisher = new FamilyRegistrationContextPublisher();
 
         //_ = new NumOfDependentsObserver(subject);
 
-        subject.Attach(new NumOfDependentsObserver());
-        subject.Attach(new FamilyIncomeObserver());
+        publisher.Register(new NumOfDependentsObserver());
+        publisher.Register(new FamilyIncomeObserver());
 
         foreach (var inputItem in input)
         {
             var context = inputItem.AdaptToFamilyRegistrationContext();
 
             //will trigger updates in all observers asynchronously
-            await subject.SetState(context);
+            await publisher.Publish(context);
 
             var outputItem = context.AdaptToOutputItem();
             output.Add(outputItem);

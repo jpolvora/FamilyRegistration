@@ -19,6 +19,9 @@ public class Program
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 
+        //builder.Services.AddHostedService<ConsumeRabbitMQHostedService>();
+
+
         builder.Services.AddScoped<IDataSource, SampleDataGenerator>();
 
         string? processarListaStrategy = builder.Configuration.GetValue<string>("CustomSettings:Strategy");
@@ -47,6 +50,8 @@ public class Program
         builder.Services.AddControllers();
 
         var app = builder.Build();
+
+        app.UseMiddleware<ResponseTimeMiddleware>();
 
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())

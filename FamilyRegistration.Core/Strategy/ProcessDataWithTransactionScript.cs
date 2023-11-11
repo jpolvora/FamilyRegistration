@@ -5,9 +5,9 @@ namespace FamilyRegistration.Core.Strategy;
 
 public class ProcessDataWithTransactionScript : IProcessDataStrategy
 {
-    public Task<Output> Execute(Input input)
+    public Task<ProcessDataOutput> Execute(ProcessDataInput input)
     {
-        var output = new Output();
+        var output = new ProcessDataOutput();
 
         foreach (var inputItem in input)
         {

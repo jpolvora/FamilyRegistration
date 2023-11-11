@@ -15,7 +15,7 @@ public class ObserverTests
     public async void CalcScoreUsingObserversShouldBe7()
     {
         //arrange 
-        var inputItem = new InputItem()
+        var inputItem = new ProcessDataInputItem()
         {
             Key = Guid.NewGuid().ToString(),
             NumOfDependents = 2,
@@ -24,7 +24,7 @@ public class ObserverTests
 
         var useCase = ProcessData.WithObservers();
         //act
-        var input = new Input(new[] { inputItem });
+        var input = new ProcessDataInput(new[] { inputItem });
         var output = await useCase.Execute(input);
 
         output.Count.Should().Be(1);
@@ -39,7 +39,7 @@ public class ObserverTests
     public async void CalcScoreUsingObserversShouldBe8()
     {
         //arrange 
-        var inputItem = new InputItem()
+        var inputItem = new ProcessDataInputItem()
         {
             Key = Guid.NewGuid().ToString(),
             NumOfDependents = 3,
@@ -49,7 +49,7 @@ public class ObserverTests
         var useCase = ProcessData.WithObservers();
 
         //act
-        var input = new Input(new[] { inputItem });
+        var input = new ProcessDataInput(new[] { inputItem });
         var output = await useCase.Execute(input);
 
         output.Count.Should().Be(1);
@@ -64,7 +64,7 @@ public class ObserverTests
     public async void CalcScoreUsingObserversShouldBe3()
     {
         //arrange 
-        var inputItem = new InputItem()
+        var inputItem = new ProcessDataInputItem()
         {
             Key = Guid.NewGuid().ToString(),
             NumOfDependents = 5,
@@ -74,7 +74,7 @@ public class ObserverTests
         var useCase = ProcessData.WithObservers();
 
         //act
-        var input = new Input(new[] { inputItem });
+        var input = new ProcessDataInput(new[] { inputItem });
         var output = await useCase.Execute(input);
 
         output.Count.Should().Be(1);

@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FamilyRegistration.Core\FamilyRegistration.Core.csproj" />
+    <ProjectReference Include="..\FamilyRegistration.Data.Queue\FamilyRegistration.Data.Queue.csproj" />
     <ProjectReference Include="..\FamilyRegistration.Data\FamilyRegistration.Data.csproj" />
     <ProjectReference Include="..\MiddlewarePipelineLib\MiddlewarePipelineLib.csproj" />
   </ItemGroup>

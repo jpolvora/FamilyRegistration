@@ -4,5 +4,5 @@ namespace FamilyRegistration.Core.Strategy;
 
 public interface IProcessDataStrategy
 {
-    Task<Output> Execute(Input input);
+    Task<ProcessDataOutput> Execute(ProcessDataInput input);
 }

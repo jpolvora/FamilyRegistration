@@ -19,7 +19,7 @@ public class WebApiTests
 
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
-        var result = await response.Content.ReadFromJsonAsync<OutputItem[]>();
+        var result = await response.Content.ReadFromJsonAsync<ProcessDataOutputItem[]>();
 
         Assert.NotNull(result);
 
@@ -32,21 +32,21 @@ public class WebApiTests
         var server = new TestWebApplicationFactory<Program>();
         var client = server.CreateClient();
 
-        var inputItem = new InputItem()
+        var inputItem = new ProcessDataInputItem()
         {
             Key = Guid.NewGuid().ToString(),
             FamilyIncome = 1000,
             NumOfDependents = 3
         };
 
-        var input = new Input(new[] { inputItem });
+        var input = new ProcessDataInput(new[] { inputItem });
 
 
         var response = await client.PostAsJsonAsync("/", input);
 
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
-        var result = await response.Content.ReadFromJsonAsync<OutputItem[]>();
+        var result = await response.Content.ReadFromJsonAsync<ProcessDataOutputItem[]>();
 
         Assert.NotNull(result);
 
@@ -73,7 +73,7 @@ public class WebApiTests
 
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
-        var result = await response.Content.ReadFromJsonAsync<OutputItem[]>();
+        var result = await response.Content.ReadFromJsonAsync<ProcessDataOutputItem[]>();
 
         Assert.NotNull(result);
 
