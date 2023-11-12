@@ -11,4 +11,10 @@ public class ProcessDataOutput : List<ProcessDataOutputItem>
     {
 
     }
+
+    public override string ToString()
+    {
+        string combinedString = string.Join(",", this);
+        return combinedString;
+    }
 }

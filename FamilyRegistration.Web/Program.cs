@@ -13,8 +13,6 @@ public class Program
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 
-        //builder.Services.AddHostedService<ConsumeRabbitMQHostedService>();        
-
         //custom config class
         builder.Services.ConfigureCustomSettings(builder.Configuration);
 

@@ -22,10 +22,6 @@ public class ProcessDataWithComposite : IProcessDataStrategy
             output.Add(outputItem);
         }
 
-
-
-
-
         return output;
     }
 
