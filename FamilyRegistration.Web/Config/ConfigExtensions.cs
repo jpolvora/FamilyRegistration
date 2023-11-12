@@ -33,9 +33,12 @@ public static class ConfigExtensions
         AmqpSettings? amqpSettings = configuration.GetSection(AmqpSettings.SectionName).Get<AmqpSettings>();
         if (amqpSettings != null && amqpSettings.Enabled == true)
         {
-            var publisher = new GenericSubject<ProcessDataInput>();
-            publisher.Register(new ProcessDataInputQueueHandler());
-            services.AddSingleton<ISubject<ProcessDataInput>>(publisher);
+            var processDataInputPublisher = new GenericSubject<ProcessDataInput>();
+            var processDataOutputPublisher = new GenericSubject<ProcessDataOutput>();
+            processDataInputPublisher.Register(new ProcessDataInputHandler(processDataOutputPublisher));
+            processDataOutputPublisher.Register(new ProcessDataOutputHandler());
+            services.AddSingleton<ISubject<ProcessDataInput>>(processDataInputPublisher);
+            services.AddSingleton<ISubject<ProcessDataOutput>>(processDataOutputPublisher);
             services.AddSingleton<IAmqpSettings>(amqpSettings);
             services.AddHostedService<ConsumeFamilyInput>();
         }
