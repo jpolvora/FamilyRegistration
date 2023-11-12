@@ -19,7 +19,7 @@ public class ProcessDataWithObservers : IProcessDataStrategy
             var context = inputItem.AdaptToFamilyRegistrationContext();
 
             //will trigger updates in all observers asynchronously
-            await publisher.Publish(context);
+            await publisher.Notify(context);
 
             var outputItem = context.AdaptToOutputItem();
             output.Add(outputItem);

@@ -1,29 +1,26 @@
-﻿using FamilyRegistration.Core.Decorator;
-using FamilyRegistration.Core.Strategy;
-using FamilyRegistration.Core.UseCases.ProcessData;
+﻿using FamilyRegistration.Core.UseCases.ProcessData;
 using FamilyRegistration.Patterns.Observer;
 
 namespace FamilyRegistration.Web.Application;
-public class ProcessDataInputHandler : GenericObserver<ProcessDataInput>
+public class ProcessDataInputHandler : GenericObserverOf<ProcessDataInput>
 {
-    private readonly ISubject<ProcessDataOutput> _publisher;
+    private readonly IObservableOf<ProcessDataOutput> _eventPublisher;
+    private readonly IProcessDataUseCase _useCase;
 
-    public ProcessDataInputHandler(ISubject<ProcessDataOutput> publisher)
+    public ProcessDataInputHandler(IObservableOf<ProcessDataOutput> publisher,
+        IProcessDataUseCase useCase)
     {
-        _publisher = publisher;
+        _eventPublisher = publisher;
+        //_useCase = ProcessData.WithPipeline();
+        _useCase = useCase;
     }
-    public override async Task Update(ProcessDataInput value)
+    public override async Task HandleNotification(ProcessDataInput value)
     {
-        //throw new NotImplementedException();
-        //instanciar useCase e executar
-        //o useCase fica responsável por coordenar as adaptações entre input e output da pipeline
-        IProcessDataStrategy strategy = new ProcessDataWithDecorator(new AggregateScoreCalculator());
-        IProcessDataUseCase useCase = new ProcessDataUseCase(strategy);
-        var output = await useCase.Execute(value);
+        var output = await _useCase.Execute(value);
         //ordenar o output pelo Score mais alto
         var result = new ProcessDataOutput(output.OrderByDescending(x => x.Score));
 
-        await this._publisher.Publish(result);
+        await this._eventPublisher.Notify(result);
 
     }
 }

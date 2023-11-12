@@ -23,38 +23,6 @@ public static class ConfigExtensions
             .Bind(configuration.GetSection(CustomSettings.SectionName))
             .ValidateDataAnnotations()
             .ValidateOnStart();
-        services.AddOptions<AmqpSettings>()
-            .Bind(configuration.GetSection(AmqpSettings.SectionName))
-            .ValidateDataAnnotations()
-            .ValidateOnStart();
-
-        services.AddScoped<IDataSource, SampleDataGenerator>();
-        services.AddScoped<IProcessDataUseCase, ProcessDataUseCase>();
-
-        AmqpSettings? amqpSettings = configuration
-            .GetSection(AmqpSettings.SectionName)
-            .Get<AmqpSettings>();
-        if (amqpSettings != null && amqpSettings.Enabled == true)
-        {
-            var connectionFactory = new ConnectionFactory()
-            {
-                HostName = amqpSettings.HostName,
-                UserName = amqpSettings.UserName,
-                Password = amqpSettings.Password,
-                VirtualHost = amqpSettings.VirtualHost
-            };
-
-            services.AddSingleton<ConnectionFactory>(connectionFactory);
-
-            //configure and register observable handlers for decoupling background services            
-
-            services.AddSingleton<Patterns.Observer.IObserver<ProcessDataInput>, ProcessDataInputHandler>();
-            services.AddSingleton<Patterns.Observer.IObserver<ProcessDataOutput>, ProcessDataOutputHandler>();
-            services.AddSingleton<ISubject<ProcessDataInput>, ProcessDataInputPublisher>();
-            services.AddSingleton<IRabbitMqProducer<ProcessDataOutput>, ProcessDataOutputProducer>();
-            services.AddSingleton<ISubject<ProcessDataOutput>, ProcessDataOutputPublisher>();
-            services.AddHostedService<ConsumeFamilyInput>();
-        }
 
         CustomSettings? customSettings = configuration
             .GetSection(CustomSettings.SectionName)
@@ -65,28 +33,63 @@ public static class ConfigExtensions
         if (customSettings.Strategy == EStrategy.Pipeline)
         {
             services
-                .AddScoped<IProcessDataStrategy, ProcessDataWithPipeline>()
-                .AddScoped<Pipeline<FamilyContext>, ScoreCalculatorPipeline>()
-                .AddScoped<IMiddleware<FamilyContext>, FamilyIncomeScoreMiddleware>()
-                .AddScoped<IMiddleware<FamilyContext>, NumOfDependentsMiddleware>();
+                .AddSingleton<IProcessDataStrategy, ProcessDataWithPipeline>()
+                .AddSingleton<Pipeline<FamilyContext>, ScoreCalculatorPipeline>()
+                .AddSingleton<IMiddleware<FamilyContext>, FamilyIncomeScoreMiddleware>()
+                .AddSingleton<IMiddleware<FamilyContext>, NumOfDependentsMiddleware>();
         }
         else if (customSettings.Strategy == EStrategy.Decorator)
         {
             services
-                .AddScoped<IProcessDataStrategy, ProcessDataWithDecorator>()
-                .AddScoped<AbstractScoreCalculator, AggregateScoreCalculator>();
+                .AddSingleton<IProcessDataStrategy, ProcessDataWithDecorator>()
+                .AddSingleton<AbstractScoreCalculator, AggregateScoreCalculator>();
         }
         else if (customSettings.Strategy == EStrategy.Observer)
         {
-            services.AddScoped<IProcessDataStrategy, ProcessDataWithObservers>();
+            services.AddSingleton<IProcessDataStrategy, ProcessDataWithObservers>();
         }
         else if (customSettings.Strategy == EStrategy.Composite)
         {
-            services.AddScoped<IProcessDataStrategy, ProcessDataWithComposite>();
+            services.AddSingleton<IProcessDataStrategy, ProcessDataWithComposite>();
         }
         else
         {
-            services.AddScoped<IProcessDataStrategy, ProcessDataWithTransactionScript>();
+            services.AddSingleton<IProcessDataStrategy, ProcessDataWithTransactionScript>();
+        }
+
+        services.AddSingleton<IDataSource, SampleDataGenerator>();
+        services.AddSingleton<IProcessDataUseCase, ProcessDataUseCase>();
+
+        services.AddOptions<AmqpSettings>()
+           .Bind(configuration.GetSection(AmqpSettings.SectionName))
+           .ValidateDataAnnotations()
+           .ValidateOnStart();
+
+        AmqpSettings? amqpSettings = configuration
+            .GetSection(AmqpSettings.SectionName)
+            .Get<AmqpSettings>();
+
+        if (amqpSettings != null && amqpSettings.Enabled == true)
+        {
+            var connectionFactory = new ConnectionFactory()
+            {
+                HostName = amqpSettings.HostName,
+                UserName = amqpSettings.UserName,
+                Password = amqpSettings.Password,
+                VirtualHost = amqpSettings.VirtualHost
+            };
+
+            services.AddSingleton(connectionFactory);
+
+            //configure and register observable handlers for decoupling background services            
+            services.AddSingleton<IRabbitMqProducer<ProcessDataOutput>, ProcessDataOutputProducer>();
+            services.AddSingleton<IObserverOf<ProcessDataInput>, ProcessDataInputHandler>();
+            services.AddSingleton<IObserverOf<ProcessDataOutput>, ProcessDataOutputHandler>();
+            services.AddSingleton<IObservableOf<ProcessDataInput>, ProcessDataInputObservable>();
+            services.AddSingleton<IObservableOf<ProcessDataOutput>, ProcessDataOutputObservable>();
+
+            services.AddHostedService<ConsumeFamilyInput>();
+
         }
     }
 }

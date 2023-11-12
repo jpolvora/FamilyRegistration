@@ -8,12 +8,14 @@ namespace FamilyRegistration.Data.Queue.BackgroundServices;
 
 public class ConsumeFamilyInput : RabbitBackgroundConsumerService
 {
-    private readonly ISubject<ProcessDataInput> _publisher;
+    private readonly IObservableOf<ProcessDataInput> _eventPublisher;
 
-    public ConsumeFamilyInput(ILoggerFactory loggerFactory, ConnectionFactory connectionFactory, ISubject<ProcessDataInput> publisher)
+    public ConsumeFamilyInput(ILoggerFactory loggerFactory,
+        ConnectionFactory connectionFactory,
+        IObservableOf<ProcessDataInput> publisher)
         : base(loggerFactory, connectionFactory)
     {
-        _publisher = publisher;
+        _eventPublisher = publisher;
     }
 
     protected override string QueueName => "Family_Input";
@@ -29,7 +31,7 @@ public class ConsumeFamilyInput : RabbitBackgroundConsumerService
 
         var input = jsonData!.Select(s => s.Adapt()).AsInput();
 
-        await _publisher.Publish(input);
+        await _eventPublisher.Notify(input);
 
         return true;
     }

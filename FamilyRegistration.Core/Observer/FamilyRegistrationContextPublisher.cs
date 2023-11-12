@@ -2,7 +2,7 @@
 
 namespace FamilyRegistration.Core.Observer;
 
-public class FamilyRegistrationContextPublisher : GenericSubject<FamilyContext>
+public class FamilyRegistrationContextPublisher : GenericObservableOf<FamilyContext>
 {
 
 }

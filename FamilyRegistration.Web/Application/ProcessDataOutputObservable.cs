@@ -3,9 +3,9 @@ using FamilyRegistration.Patterns.Observer;
 
 namespace FamilyRegistration.Web.Application;
 
-public class ProcessDataInputPublisher : GenericSubject<ProcessDataInput>
+public class ProcessDataOutputObservable : GenericObservableOf<ProcessDataOutput>
 {
-    public ProcessDataInputPublisher(IEnumerable<Patterns.Observer.IObserver<ProcessDataInput>> observers)
+    public ProcessDataOutputObservable(IEnumerable<IObserverOf<ProcessDataOutput>> observers)
     {
         foreach (var observer in observers)
         {
