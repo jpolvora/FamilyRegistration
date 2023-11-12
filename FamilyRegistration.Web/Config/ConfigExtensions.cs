@@ -46,22 +46,13 @@ public static class ConfigExtensions
 
             services.AddSingleton<ConnectionFactory>(connectionFactory);
 
-            //configure and register observable handlers for decoupling background services
-            var loggerFactory = LoggerFactory.Create(loggingBuilder => loggingBuilder
-                .SetMinimumLevel(LogLevel.Trace)
-                .AddConsole());
+            //configure and register observable handlers for decoupling background services            
 
-            ILogger<RabbitMqClientBase> logger = loggerFactory.CreateLogger<RabbitMqClientBase>();
-
-            var producer = new ProcessDataOutputProducer(connectionFactory, loggerFactory);
-
-            var processDataInputPublisher = new GenericSubject<ProcessDataInput>();
-            var processDataOutputPublisher = new GenericSubject<ProcessDataOutput>();
-            processDataInputPublisher.Register(new ProcessDataInputHandler(processDataOutputPublisher));
-            processDataOutputPublisher.Register(new ProcessDataOutputHandler(producer));
-
-            services.AddSingleton<ISubject<ProcessDataInput>>(processDataInputPublisher);
-            services.AddSingleton<ISubject<ProcessDataOutput>>(processDataOutputPublisher);
+            services.AddSingleton<Patterns.Observer.IObserver<ProcessDataInput>, ProcessDataInputHandler>();
+            services.AddSingleton<Patterns.Observer.IObserver<ProcessDataOutput>, ProcessDataOutputHandler>();
+            services.AddSingleton<ISubject<ProcessDataInput>, ProcessDataInputPublisher>();
+            services.AddSingleton<IRabbitMqProducer<ProcessDataOutput>, ProcessDataOutputProducer>();
+            services.AddSingleton<ISubject<ProcessDataOutput>, ProcessDataOutputPublisher>();
             services.AddHostedService<ConsumeFamilyInput>();
         }
 
