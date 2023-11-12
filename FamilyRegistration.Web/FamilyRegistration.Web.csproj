@@ -2,11 +2,20 @@
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
+    <StartupObject>FamilyRegistration.Web.Program</StartupObject>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>775a8e12-c6c7-4548-a305-9d9ab071208b</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="DatabaseImporter.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="DatabaseImporter.cs" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Bogus" Version="34.0.2" />

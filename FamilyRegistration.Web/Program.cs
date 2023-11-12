@@ -1,9 +1,11 @@
 using FamilyRegistration.Web.Config;
 using FamilyRegistration.Web.Routes;
 
+namespace FamilyRegistration.Web;
+
 public class Program
 {
-    private static void Main(string[] args)
+    public static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
         var (services, configuration) = builder;
