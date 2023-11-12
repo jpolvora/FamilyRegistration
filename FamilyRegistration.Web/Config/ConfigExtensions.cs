@@ -11,6 +11,7 @@ using FamilyRegistration.Data.Queue.Common;
 using FamilyRegistration.Patterns.Observer;
 using FamilyRegistration.Patterns.Pipeline;
 using FamilyRegistration.Web.Application;
+using RabbitMQ.Client;
 
 namespace FamilyRegistration.Web.Config;
 
@@ -30,20 +31,43 @@ public static class ConfigExtensions
         services.AddScoped<IDataSource, SampleDataGenerator>();
         services.AddScoped<IProcessDataUseCase, ProcessDataUseCase>();
 
-        AmqpSettings? amqpSettings = configuration.GetSection(AmqpSettings.SectionName).Get<AmqpSettings>();
+        AmqpSettings? amqpSettings = configuration
+            .GetSection(AmqpSettings.SectionName)
+            .Get<AmqpSettings>();
         if (amqpSettings != null && amqpSettings.Enabled == true)
         {
+            var connectionFactory = new ConnectionFactory()
+            {
+                HostName = amqpSettings.HostName,
+                UserName = amqpSettings.UserName,
+                Password = amqpSettings.Password,
+                VirtualHost = amqpSettings.VirtualHost
+            };
+
+            services.AddSingleton<ConnectionFactory>(connectionFactory);
+
+            //configure and register observable handlers for decoupling background services
+            var loggerFactory = LoggerFactory.Create(loggingBuilder => loggingBuilder
+                .SetMinimumLevel(LogLevel.Trace)
+                .AddConsole());
+
+            ILogger<RabbitMqClientBase> logger = loggerFactory.CreateLogger<RabbitMqClientBase>();
+
+            var producer = new ProcessDataOutputProducer(connectionFactory, loggerFactory);
+
             var processDataInputPublisher = new GenericSubject<ProcessDataInput>();
             var processDataOutputPublisher = new GenericSubject<ProcessDataOutput>();
             processDataInputPublisher.Register(new ProcessDataInputHandler(processDataOutputPublisher));
-            processDataOutputPublisher.Register(new ProcessDataOutputHandler());
+            processDataOutputPublisher.Register(new ProcessDataOutputHandler(producer));
+
             services.AddSingleton<ISubject<ProcessDataInput>>(processDataInputPublisher);
             services.AddSingleton<ISubject<ProcessDataOutput>>(processDataOutputPublisher);
-            services.AddSingleton<IAmqpSettings>(amqpSettings);
             services.AddHostedService<ConsumeFamilyInput>();
         }
 
-        CustomSettings? customSettings = configuration.GetSection(CustomSettings.SectionName).Get<CustomSettings>();
+        CustomSettings? customSettings = configuration
+            .GetSection(CustomSettings.SectionName)
+            .Get<CustomSettings>();
 
         if (customSettings == null) return;
 

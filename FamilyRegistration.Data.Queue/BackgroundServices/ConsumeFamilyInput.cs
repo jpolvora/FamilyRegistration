@@ -1,8 +1,8 @@
 ﻿using System.Text.Json;
 using FamilyRegistration.Core.UseCases.ProcessData;
-using FamilyRegistration.Data.Queue.Common;
 using FamilyRegistration.Patterns.Observer;
 using Microsoft.Extensions.Logging;
+using RabbitMQ.Client;
 
 namespace FamilyRegistration.Data.Queue.BackgroundServices;
 
@@ -10,8 +10,8 @@ public class ConsumeFamilyInput : RabbitBackgroundConsumerService
 {
     private readonly ISubject<ProcessDataInput> _publisher;
 
-    public ConsumeFamilyInput(ILoggerFactory loggerFactory, IAmqpSettings settings, ISubject<ProcessDataInput> publisher)
-        : base(loggerFactory, settings)
+    public ConsumeFamilyInput(ILoggerFactory loggerFactory, ConnectionFactory connectionFactory, ISubject<ProcessDataInput> publisher)
+        : base(loggerFactory, connectionFactory)
     {
         _publisher = publisher;
     }

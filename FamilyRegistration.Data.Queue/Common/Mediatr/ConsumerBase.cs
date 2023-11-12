@@ -5,23 +5,19 @@ using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 
-namespace FamilyRegistration.Data.Queue.Common;
+namespace FamilyRegistration.Data.Queue.Common.Mediatr;
 
 public abstract class ConsumerBase : RabbitMqClientBase
 {
     private readonly IMediator _mediator;
-    private readonly ILogger<ConsumerBase> _logger;
-    protected abstract string QueueName { get; }
 
     public ConsumerBase(
         IMediator mediator,
         ConnectionFactory connectionFactory,
-        ILogger<ConsumerBase> consumerLogger,
-        ILogger<RabbitMqClientBase> logger) :
-        base(connectionFactory, logger)
+        ILoggerFactory loggerFactory) :
+        base(connectionFactory, loggerFactory)
     {
         _mediator = mediator;
-        _logger = consumerLogger;
     }
 
     protected virtual async Task OnEventReceived<T>(object sender, BasicDeliverEventArgs @event)

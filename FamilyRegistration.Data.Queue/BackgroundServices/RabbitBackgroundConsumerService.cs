@@ -1,5 +1,4 @@
 ﻿using System.Text;
-using FamilyRegistration.Data.Queue.Common;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using RabbitMQ.Client;
@@ -12,27 +11,21 @@ public abstract class RabbitBackgroundConsumerService : BackgroundService
     protected abstract string QueueName { get; }
 
     private readonly ILogger _logger;
+    private readonly ConnectionFactory _connectionFactory;
     private IConnection? _connection;
     private IModel? _channel;
 
-    public RabbitBackgroundConsumerService(ILoggerFactory loggerFactory, IAmqpSettings settings)
+    public RabbitBackgroundConsumerService(ILoggerFactory loggerFactory, ConnectionFactory connectionFactory)
     {
         _logger = loggerFactory.CreateLogger<RabbitBackgroundConsumerService>();
-        InitRabbitMQ(settings);
+        _connectionFactory = connectionFactory;
+        InitRabbitMQ();
     }
 
-    private void InitRabbitMQ(IAmqpSettings settings)
+    private void InitRabbitMQ()
     {
-        var factory = new ConnectionFactory()
-        {
-            HostName = settings.HostName,
-            UserName = settings.UserName,
-            Password = settings.Password,
-            VirtualHost = settings.VirtualHost
-        };
-
         // create connection  
-        _connection = factory.CreateConnection();
+        _connection = _connectionFactory.CreateConnection();
 
         // create channel  
         _channel = _connection.CreateModel();

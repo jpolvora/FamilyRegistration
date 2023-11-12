@@ -1,4 +1,5 @@
 ﻿using FamilyRegistration.Data.Queue.Common;
+using FamilyRegistration.Data.Queue.Common.Mediatr;
 using MediatR;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;

@@ -6,7 +6,7 @@ https://app.diagrams.net/#G12mZhdZ8vdN39F70kvkzcXdgqlzrv0XNU
 
 # Overview of design and patterns
 
-### Patterns
+### Design Patterns
 
 * Pipeline (Chain of Responsability)
 * Decorator
@@ -14,7 +14,6 @@ https://app.diagrams.net/#G12mZhdZ8vdN39F70kvkzcXdgqlzrv0XNU
 * Composite
 * Observer
 * Factory
-* Facade
 
 
 ### SOLID Features
@@ -26,18 +25,17 @@ https://app.diagrams.net/#G12mZhdZ8vdN39F70kvkzcXdgqlzrv0XNU
 
 ### Functional Programming
 
-* DTO Adapters
-* Minimal API (ASP.NET Core Web Api)
+* DTO / Adapters / Mappers
 * Pattern Matching (switch)
 
 ### OOP Features
 
 * Class and Interface inheritance
+* Composition over inheritance
 * Abstract classes
 * .NET Generics
-* Constructor parameters
+* Constructor parameters / Constructor Injection
 * Encapsulation
-* Methods
 * Async/Await
 * Data Transfer Objects
 * Object Mapper
@@ -46,7 +44,7 @@ https://app.diagrams.net/#G12mZhdZ8vdN39F70kvkzcXdgqlzrv0XNU
 
 * Feature Flags
 * Exception Handling
-* 
+* Listen to Yourself Pattern (outbox)
 
 # Technologies
 
