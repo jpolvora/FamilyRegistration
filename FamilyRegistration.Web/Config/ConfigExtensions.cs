@@ -19,6 +19,14 @@ public static class ConfigExtensions
 {
     public static void ConfigureCustomSettings(this IServiceCollection services, IConfiguration configuration)
     {
+        //using (IServiceScope scope = _serviceProvider.CreateScope())
+        //{
+        //    IScopedProcessingService scopedProcessingService =
+        //        scope.ServiceProvider.GetRequiredService<IScopedProcessingService>();
+
+        //    await scopedProcessingService.DoWorkAsync(stoppingToken);
+        //}
+
         services.AddOptions<CustomSettings>()
             .Bind(configuration.GetSection(CustomSettings.SectionName))
             .ValidateDataAnnotations()
@@ -46,19 +54,23 @@ public static class ConfigExtensions
         }
         else if (customSettings.Strategy == EStrategy.Observer)
         {
-            services.AddSingleton<IProcessDataStrategy, ProcessDataWithObservers>();
+            services
+                .AddSingleton<IProcessDataStrategy, ProcessDataWithObservers>();
         }
         else if (customSettings.Strategy == EStrategy.Composite)
         {
-            services.AddSingleton<IProcessDataStrategy, ProcessDataWithComposite>();
+            services
+                .AddSingleton<IProcessDataStrategy, ProcessDataWithComposite>();
         }
         else
         {
-            services.AddSingleton<IProcessDataStrategy, ProcessDataWithTransactionScript>();
+            services
+                .AddSingleton<IProcessDataStrategy, ProcessDataWithTransactionScript>();
         }
 
-        services.AddSingleton<IDataSource, SampleDataGenerator>();
-        services.AddSingleton<IProcessDataUseCase, ProcessDataUseCase>();
+        services
+            .AddSingleton<IDataSource, SampleDataGenerator>()
+            .AddSingleton<IProcessDataUseCase, ProcessDataUseCase>();
 
         services.AddOptions<AmqpSettings>()
            .Bind(configuration.GetSection(AmqpSettings.SectionName))
@@ -82,13 +94,13 @@ public static class ConfigExtensions
             services.AddSingleton(connectionFactory);
 
             //configure and register observable handlers for decoupling background services            
-            services.AddSingleton<IRabbitMqProducer<ProcessDataOutput>, ProcessDataOutputProducer>();
-            services.AddSingleton<IObserverOf<ProcessDataInput>, ProcessDataInputHandler>();
-            services.AddSingleton<IObserverOf<ProcessDataOutput>, ProcessDataOutputHandler>();
-            services.AddSingleton<IObservableOf<ProcessDataInput>, ProcessDataInputObservable>();
-            services.AddSingleton<IObservableOf<ProcessDataOutput>, ProcessDataOutputObservable>();
-
-            services.AddHostedService<ConsumeFamilyInput>();
+            services
+                .AddSingleton<IRabbitMqProducer<ProcessDataOutput>, ProcessDataOutputProducer>()
+                .AddSingleton<IObserverOf<ProcessDataInput>, ProcessDataInputHandler>()
+                .AddSingleton<IObserverOf<ProcessDataOutput>, ProcessDataOutputHandler>()
+                .AddSingleton<IObservableOf<ProcessDataInput>, ProcessDataInputObservable>()
+                .AddSingleton<IObservableOf<ProcessDataOutput>, ProcessDataOutputObservable>()
+                .AddHostedService<ConsumeFamilyInput>();
 
         }
     }
