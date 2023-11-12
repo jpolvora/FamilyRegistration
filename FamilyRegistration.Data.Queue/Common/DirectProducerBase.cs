@@ -30,7 +30,7 @@ public abstract class DirectProducerBase<T> : RabbitMqClientBase, IRabbitMqProdu
             properties.ContentType = "application/json";
             properties.DeliveryMode = 1; // Doesn't persist to disk
             properties.Timestamp = new AmqpTimestamp(DateTimeOffset.UtcNow.ToUnixTimeSeconds());
-            Channel.BasicPublish(exchange: string.Empty, routingKey: string.Empty, body: body, basicProperties: properties);
+            Channel.BasicPublish(exchange: string.Empty, routingKey: QueueName, body: body, basicProperties: properties);
         }
         catch (Exception ex)
         {
