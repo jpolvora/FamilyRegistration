@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using RabbitMQ.Client;
 
-namespace FamilyRegistration.Data.Queue;
+namespace FamilyRegistration.Data.Queue.Common;
 
 public abstract class RabbitMqClientBase : IDisposable
 {

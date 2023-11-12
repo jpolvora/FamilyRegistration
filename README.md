@@ -8,11 +8,13 @@ https://app.diagrams.net/#G12mZhdZ8vdN39F70kvkzcXdgqlzrv0XNU
 
 ### Patterns
 
-* Chain of responsability
-* Middleware Pipeline
+* Pipeline (Chain of Responsability)
 * Decorator
 * Strategy
 * Composite
+* Observer
+* Factory
+* Facade
 
 
 ### SOLID Features
@@ -44,3 +46,10 @@ https://app.diagrams.net/#G12mZhdZ8vdN39F70kvkzcXdgqlzrv0XNU
 
 * Feature Flags
 * Exception Handling
+* 
+
+# Technologies
+
+* ASP.NET CORE 7 Web API
+* PostgreSQL
+* RabbitMQ

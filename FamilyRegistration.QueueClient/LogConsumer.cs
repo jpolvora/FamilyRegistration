@@ -1,10 +1,12 @@
-﻿using MediatR;
+﻿using FamilyRegistration.Data.Queue.Common;
+using MediatR;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 
-namespace FamilyRegistration.Data.Queue;
+namespace FamilyRegistration.QueueClient;
+
 public class LogConsumer : ConsumerBase, IHostedService
 {
     protected override string QueueName => "CUSTOM_HOST.log.message";
@@ -20,7 +22,7 @@ public class LogConsumer : ConsumerBase, IHostedService
         try
         {
             var consumer = new AsyncEventingBasicConsumer(Channel);
-            consumer.Received += OnEventReceived<LogCommand>;
+            consumer.Received += OnEventReceived<Calculatte>;
             Channel.BasicConsume(queue: QueueName, autoAck: false, consumer: consumer);
         }
         catch (Exception ex)
@@ -37,3 +39,5 @@ public class LogConsumer : ConsumerBase, IHostedService
         return Task.CompletedTask;
     }
 }
+
+

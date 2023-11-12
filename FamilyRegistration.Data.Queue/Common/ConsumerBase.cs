@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 
-namespace FamilyRegistration.Data.Queue;
+namespace FamilyRegistration.Data.Queue.Common;
 
 public abstract class ConsumerBase : RabbitMqClientBase
 {
@@ -31,7 +31,7 @@ public abstract class ConsumerBase : RabbitMqClientBase
             var body = Encoding.UTF8.GetString(@event.Body.ToArray());
             var message = JsonConvert.DeserializeObject<T>(body);
 
-            await _mediator.Send(message);
+            _ = await _mediator.Send(message!);
         }
         catch (Exception ex)
         {

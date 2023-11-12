@@ -3,7 +3,7 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
 
-namespace FamilyRegistration.Data.Queue;
+namespace FamilyRegistration.Data.Queue.Common;
 
 public abstract class ProducerBase<T> : RabbitMqClientBase, IRabbitMqProducer<T>
 {

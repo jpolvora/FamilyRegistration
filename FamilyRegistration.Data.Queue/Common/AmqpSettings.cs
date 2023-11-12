@@ -1,6 +1,6 @@
-﻿namespace FamilyRegistration.Data.Queue;
+﻿namespace FamilyRegistration.Data.Queue.Common;
 
-public class AmqpSettings
+public class AmqpSettings : IAmqpSettings
 {
     public const string SectionName = nameof(AmqpSettings);
     public bool? Enabled { get; set; }

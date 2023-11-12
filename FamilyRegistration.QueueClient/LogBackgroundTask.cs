@@ -1,6 +1,7 @@
-﻿using Microsoft.Extensions.Hosting;
+﻿using FamilyRegistration.Data.Queue.Common;
+using Microsoft.Extensions.Hosting;
 
-namespace FamilyRegistration.Data.Queue;
+namespace FamilyRegistration.QueueClient;
 
 public class LogBackgroundTask : BackgroundService
 {

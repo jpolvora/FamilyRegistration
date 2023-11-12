@@ -6,8 +6,11 @@ using FamilyRegistration.Core.Pipeline.Middlewares;
 using FamilyRegistration.Core.Strategy;
 using FamilyRegistration.Core.UseCases.ProcessData;
 using FamilyRegistration.Data;
-using FamilyRegistration.Data.Queue;
+using FamilyRegistration.Data.Queue.BackgroundServices;
+using FamilyRegistration.Data.Queue.Common;
+using FamilyRegistration.Patterns.Observer;
 using FamilyRegistration.Patterns.Pipeline;
+using FamilyRegistration.Web.Application;
 
 namespace FamilyRegistration.Web.Config;
 
@@ -24,16 +27,17 @@ public static class ConfigExtensions
             .ValidateDataAnnotations()
             .ValidateOnStart();
 
-
-
         services.AddScoped<IDataSource, SampleDataGenerator>();
         services.AddScoped<IProcessDataUseCase, ProcessDataUseCase>();
 
         AmqpSettings? amqpSettings = configuration.GetSection(AmqpSettings.SectionName).Get<AmqpSettings>();
         if (amqpSettings != null && amqpSettings.Enabled == true)
         {
-            services.AddSingleton<AmqpSettings>(amqpSettings);
-            services.AddHostedService<ConsumeRabbitMQHostedService>();
+            var publisher = new GenericSubject<ProcessDataInput>();
+            publisher.Register(new ProcessDataInputQueueHandler());
+            services.AddSingleton<ISubject<ProcessDataInput>>(publisher);
+            services.AddSingleton<IAmqpSettings>(amqpSettings);
+            services.AddHostedService<ConsumeFamilyInput>();
         }
 
         CustomSettings? customSettings = configuration.GetSection(CustomSettings.SectionName).Get<CustomSettings>();

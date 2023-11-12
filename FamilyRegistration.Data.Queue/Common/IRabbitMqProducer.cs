@@ -1,4 +1,4 @@
-﻿namespace FamilyRegistration.Data.Queue;
+﻿namespace FamilyRegistration.Data.Queue.Common;
 
 public interface IRabbitMqProducer<in T>
 {
