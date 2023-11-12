@@ -21,7 +21,7 @@ public class SampleDataGenerator : IDataSource
         var family = new Faker<ProcessDataInputItem>()
             .RuleFor(f => f.Key, f => Guid.NewGuid().ToString())
             .RuleFor(f => f.FamilyIncome, f => f.Random.Number(0, 2000))
-            .RuleFor(f => f.NumOfDependents, f => f.Random.Number(1, 6))
+            .RuleFor(f => f.NumOfDependents, f => f.Random.Number(0, 6))
             .Generate(count);
 
         result.AddRange(family);

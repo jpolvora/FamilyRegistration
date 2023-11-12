@@ -14,6 +14,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		SOLUTION_ITEMS\diagrama.PNG = SOLUTION_ITEMS\diagrama.PNG
 		SOLUTION_ITEMS\json_format.PNG = SOLUTION_ITEMS\json_format.PNG
 		SOLUTION_ITEMS\MOCK_DATA.json = SOLUTION_ITEMS\MOCK_DATA.json
+		SOLUTION_ITEMS\MOCK_DATA_SMALL.json = SOLUTION_ITEMS\MOCK_DATA_SMALL.json
 		README.md = README.md
 	EndProjectSection
 EndProject
@@ -25,7 +26,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FamilyRegistration.Data.Que
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{FCC20FB0-7824-49FB-8CBB-C003F862CEB9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FamilyRegistration.Patterns", "FamilyRegistration.Patterns\FamilyRegistration.Patterns.csproj", "{A2797458-9DB9-4912-83FB-2DBA4E324735}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FamilyRegistration.Patterns", "FamilyRegistration.Patterns\FamilyRegistration.Patterns.csproj", "{A2797458-9DB9-4912-83FB-2DBA4E324735}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
