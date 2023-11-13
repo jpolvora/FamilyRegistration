@@ -6,6 +6,13 @@ https://app.diagrams.net/#G12mZhdZ8vdN39F70kvkzcXdgqlzrv0XNU
 
 # Overview of design and patterns
 
+## Clean Code
+
+* Separation of Concerns (SOC)
+* Don't Repeat Yourself (DRY)
+* Keep It Simple, Silly (KISS)
+* Small commits
+
 ### Design Patterns
 
 * Pipeline (Chain of Responsability)
