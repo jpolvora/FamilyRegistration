@@ -1,4 +1,5 @@
-﻿using FamilyRegistration.Core.UseCases.ProcessData;
+﻿using FamilyRegistration.Core.Domain;
+using FamilyRegistration.Core.UseCases.ProcessData;
 using FamilyRegistration.Patterns.Pipeline;
 
 namespace FamilyRegistration.Core.Strategy;

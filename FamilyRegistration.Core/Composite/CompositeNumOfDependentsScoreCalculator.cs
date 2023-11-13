@@ -1,4 +1,5 @@
 ﻿using FamilyRegistration.Core.Calculators;
+using FamilyRegistration.Core.Domain;
 using FamilyRegistration.Patterns.Composite;
 
 namespace FamilyRegistration.Core.Composite;

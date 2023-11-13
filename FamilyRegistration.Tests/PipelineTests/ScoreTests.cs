@@ -1,4 +1,4 @@
-using FamilyRegistration.Core;
+using FamilyRegistration.Core.Domain;
 using FamilyRegistration.Core.Pipeline;
 using FamilyRegistration.Core.Pipeline.Middlewares;
 using FamilyRegistration.Patterns.Pipeline;

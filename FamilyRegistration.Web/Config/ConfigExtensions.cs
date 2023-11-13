@@ -1,6 +1,6 @@
-﻿using FamilyRegistration.Core;
-using FamilyRegistration.Core.Datasources;
+﻿using FamilyRegistration.Core.Datasources;
 using FamilyRegistration.Core.Decorator;
+using FamilyRegistration.Core.Domain;
 using FamilyRegistration.Core.Pipeline;
 using FamilyRegistration.Core.Pipeline.Middlewares;
 using FamilyRegistration.Core.Strategy;
@@ -8,9 +8,11 @@ using FamilyRegistration.Core.UseCases.ProcessData;
 using FamilyRegistration.Data;
 using FamilyRegistration.Data.Queue.BackgroundServices;
 using FamilyRegistration.Data.Queue.Common;
+using FamilyRegistration.EFCore;
 using FamilyRegistration.Patterns.Observer;
 using FamilyRegistration.Patterns.Pipeline;
 using FamilyRegistration.Web.Application;
+using Microsoft.EntityFrameworkCore;
 using RabbitMQ.Client;
 
 namespace FamilyRegistration.Web.Config;
@@ -26,6 +28,11 @@ public static class ConfigExtensions
 
         //    await scopedProcessingService.DoWorkAsync(stoppingToken);
         //}
+
+        services.AddDbContextFactory<FamilyDbContext>(options =>
+        {
+            options.UseNpgsql(configuration.GetConnectionString("PostgresDataSource"));
+        }, ServiceLifetime.Singleton);
 
         services.AddOptions<CustomSettings>()
             .Bind(configuration.GetSection(CustomSettings.SectionName))

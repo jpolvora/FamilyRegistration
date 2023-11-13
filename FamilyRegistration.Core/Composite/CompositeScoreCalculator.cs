@@ -1,4 +1,5 @@
-﻿using FamilyRegistration.Patterns.Composite;
+﻿using FamilyRegistration.Core.Domain;
+using FamilyRegistration.Patterns.Composite;
 
 namespace FamilyRegistration.Core.Composite;
 

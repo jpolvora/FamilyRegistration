@@ -1,4 +1,5 @@
-﻿using FamilyRegistration.Core.Pipeline.Middlewares;
+﻿using FamilyRegistration.Core.Domain;
+using FamilyRegistration.Core.Pipeline.Middlewares;
 using FamilyRegistration.Patterns.Pipeline;
 
 namespace FamilyRegistration.Core.Pipeline;

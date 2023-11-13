@@ -1,4 +1,6 @@
-﻿namespace FamilyRegistration.Core.UseCases.ProcessData;
+﻿using FamilyRegistration.Core.Domain;
+
+namespace FamilyRegistration.Core.UseCases.ProcessData;
 
 public static class AdapterExtensions
 {

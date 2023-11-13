@@ -1,4 +1,6 @@
-﻿namespace FamilyRegistration.Core.Decorator;
+﻿using FamilyRegistration.Core.Domain;
+
+namespace FamilyRegistration.Core.Decorator;
 
 public class ScoreCalculator : AbstractScoreCalculator
 {

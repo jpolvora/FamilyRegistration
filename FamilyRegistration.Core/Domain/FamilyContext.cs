@@ -1,4 +1,4 @@
-﻿namespace FamilyRegistration.Core;
+﻿namespace FamilyRegistration.Core.Domain;
 
 public class FamilyContext
 {

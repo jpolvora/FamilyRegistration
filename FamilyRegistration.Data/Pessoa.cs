@@ -1,5 +1,6 @@
 ﻿namespace FamilyRegistration.Data;
 
+
 public class Pessoa
 {
     public Guid Id { get; set; }
