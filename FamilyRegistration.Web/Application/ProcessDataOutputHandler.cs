@@ -21,16 +21,37 @@ public class ProcessDataOutputHandler : GenericObserverOf<ProcessDataOutput>
     {
         using (var db = this._dbContextFactory.CreateDbContext())
         {
-
-            ////publish to queue
             foreach (var item in value)
             {
-                //save to database
-                var pessoa = new Pessoa()
+                //save or update                
+                if (Guid.TryParse(item.Key, out Guid key))
                 {
-                    Id = Guid.Parse(item.Key),
-                };
-                db.Pessoas.Add(pessoa);
+                    var pessoa = await db.Pessoas.FirstOrDefaultAsync(p => p.Id == key);
+                    if (pessoa is not null)
+                    {
+                        //update                                                
+                        pessoa.Dependents = item.NumOfDependents;
+                        pessoa.Income = item.FamilyIncome;
+                        pessoa.FullName = "Nome do responsável da família";
+                        pessoa.Gender = "Male";
+                        pessoa.Score = item.Score;
+                    }
+                    else
+                    {
+                        pessoa = new Pessoa()
+                        {
+                            Id = key,
+                            Age = 0,
+                            Dependents = item.NumOfDependents,
+                            Income = item.FamilyIncome,
+                            FullName = "Nome do responsável da família",
+                            Gender = "Male",
+                            Score = item.Score
+                        };
+
+                        db.Pessoas.Add(pessoa);
+                    }
+                }
             }
 
             await db.SaveChangesAsync();

@@ -15,14 +15,17 @@ public class Pessoa : EntityBase<Guid>
     public string? Gender { get; set; }
 
     [Column("age")]
-    public int Age { get; set; }
+    public int? Age { get; set; }
 
     [Column("income")]
-    public decimal Income { get; set; }
+    public decimal? Income { get; set; }
 
     [Column("parent")]
     public Guid? Parent { get; set; }
 
     [Column("dependents")]
-    public int Dependents { get; set; }
+    public int? Dependents { get; set; }
+
+    [Column("score")]
+    public int? Score { get; set; }
 }

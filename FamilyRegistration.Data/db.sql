@@ -26,3 +26,10 @@ TABLESPACE pg_default;
 
 ALTER TABLE IF EXISTS public."Pessoas"
     OWNER to postgres;
+
+-- Column: public."Pessoas".score
+
+-- ALTER TABLE IF EXISTS public."Pessoas" DROP COLUMN IF EXISTS score;
+
+ALTER TABLE IF EXISTS public."Pessoas"
+    ADD COLUMN score integer;
